@@ -6,7 +6,7 @@ public class GameViewManager : ViewManager
 {
 	private GameManager gameManager
 	{
-		get {return gameObject.GetComponent<GameManager>();}
+		get {return GetComponent<GameManager>();}
 	}
 
 	[SerializeField]

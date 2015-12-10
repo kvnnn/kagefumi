@@ -10,11 +10,11 @@ public class ButtonParts : BaseUIParts
 
 	private Image image
 	{
-		get {return gameObject.GetComponent<Image>();}
+		get {return GetComponent<Image>();}
 	}
 	private Button button
 	{
-		get {return gameObject.GetComponent<Button>();}
+		get {return GetComponent<Button>();}
 	}
 
 	public System.Action<ButtonParts> buttonClick;

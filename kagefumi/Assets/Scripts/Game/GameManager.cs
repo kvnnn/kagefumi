@@ -6,15 +6,33 @@ public class GameManager : GameMonoBehaviour
 {
 	private StageManager stageManager
 	{
-		get {return gameObject.GetComponent<StageManager>();}
+		get {return GetComponent<StageManager>();}
 	}
+
+	[SerializeField]
+	private GameObject mainCharacterPrefab;
+	private MainCharacter mainCharacter;
 
 #region Init
 	public void InitGame()
 	{
 		stageManager.Init();
+		InitMainCharacter();
 
 		PrepareGame();
+	}
+
+	private void InitMainCharacter()
+	{
+		if (mainCharacter == null || mainCharacter.isDead)
+		{
+			Transform characterTransform = Instantiate(mainCharacterPrefab).transform;
+			characterTransform.SetParent(transform);
+			characterTransform.MoveY(characterTransform.localScale.y);
+			mainCharacter = characterTransform.GetComponent<MainCharacter>();
+		}
+
+		Camera.main.gameObject.GetComponent<CharacterCamera>().SetCharacter(mainCharacter.transform);
 	}
 #endregion
 

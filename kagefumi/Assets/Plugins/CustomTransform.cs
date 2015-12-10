@@ -19,6 +19,20 @@ public static class CustomTransform
 		angles.y = y;
 		transform.localEulerAngles = angles;
 	}
+
+	public static void RotateLocalEulerAnglesX(this Transform transform, float x)
+	{
+		Vector3 angles = transform.localEulerAngles;
+		angles.x = x;
+		transform.localEulerAngles = angles;
+	}
+
+	public static void MoveY(this Transform transform, float y)
+	{
+		Vector3 position = transform.position;
+		position.y = y;
+		transform.position = position;
+	}
 #endregion
 
 #region RectTransform
