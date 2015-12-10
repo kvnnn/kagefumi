@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dccdb9414704927af7d681600b3fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStagePrefab: {fileID: 466632, guid: 8fef76ac3539c4e00bfea52ddc438a21, type: 2}
 --- !u!223 &22308742
 Canvas:
   m_ObjectHideFlags: 1
@@ -166,6 +167,10 @@ Prefab:
       propertyPath: uiBaseTransform
       value: 
       objectReference: {fileID: 22482414}
+    - target: {fileID: 0}
+      propertyPath: baseStagePrefab
+      value: 
+      objectReference: {fileID: 466632, guid: 8fef76ac3539c4e00bfea52ddc438a21, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143826}
