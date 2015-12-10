@@ -6,7 +6,7 @@ public class GameManager : GameMonoBehaviour
 {
 	private StageManager stageManager
 	{
-		get {return gameObject.GetComponent<StageManager>();}
+		get {return GetComponent<StageManager>();}
 	}
 
 #region Init
