@@ -301,6 +301,7 @@ MonoBehaviour:
   viewBaseTransform: {fileID: 155334356}
   viewPrefabs:
   - {fileID: 143826, guid: d18e718dc92f94c6688f67a6e049b6d5, type: 2}
+  - {fileID: 143826, guid: a94150a67bef844b4a141e1a5e85ec88, type: 2}
 --- !u!4 &1218542968
 Transform:
   m_ObjectHideFlags: 0
