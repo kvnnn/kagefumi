@@ -18,6 +18,15 @@ public class LightManager : GameMonoBehaviour
 		}
 	}
 
+#if UNITY_EDITOR
+	public void Update()
+	{
+		if (shadowDetectors_ == null) {return;}
+		// For Debug
+		// UpdateShadowData();
+	}
+#endif
+
 	public void Init(BaseObject[] objects)
 	{
 		shadowDetectors_ = null;
@@ -36,5 +45,20 @@ public class LightManager : GameMonoBehaviour
 		{
 			shadowDetector.UpdateShadowData();
 		}
+	}
+
+	public BaseObject GetShadowObject(Vector3 position)
+	{
+		Vector2 positionInVector2 = new Vector2(position.x, position.z);
+
+		foreach (ShadowDetector shadowDetector in shadowDetectors)
+		{
+			BaseObject baseObject = shadowDetector.GetShadowObject(positionInVector2);
+			if (baseObject != null)
+			{
+				return baseObject;
+			}
+		}
+		return null;
 	}
 }

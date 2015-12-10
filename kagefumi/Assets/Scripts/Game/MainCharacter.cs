@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class MainCharacter : GameMonoBehaviour
 {
+	public System.Action<Vector3> onUpdate;
+
 	private CharacterController controller
 	{
 		get {return GetComponent<CharacterController>();}
@@ -43,6 +45,11 @@ public class MainCharacter : GameMonoBehaviour
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= 5.0f;
 			controller.Move(moveDirection * Time.deltaTime);
+
+			if (onUpdate != null)
+			{
+				onUpdate(transform.position);
+			}
 		}
 	}
 }
