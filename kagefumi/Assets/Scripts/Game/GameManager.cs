@@ -31,6 +31,8 @@ public class GameManager : GameMonoBehaviour
 			characterTransform.MoveY(characterTransform.localScale.y);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
 		}
+
+		Camera.main.gameObject.GetComponent<CharacterCamera>().SetCharacter(mainCharacter.transform);
 	}
 #endregion
 
