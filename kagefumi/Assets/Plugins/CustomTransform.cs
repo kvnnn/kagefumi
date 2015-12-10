@@ -28,5 +28,12 @@ public static class CustomTransform
 		position.y = y;
 		transform.anchoredPosition = position;
 	}
+
+	public static void MoveY(this Transform transform, float y)
+	{
+		Vector3 position = transform.position;
+		position.y = y;
+		transform.position = position;
+	}
 #endregion
 }
