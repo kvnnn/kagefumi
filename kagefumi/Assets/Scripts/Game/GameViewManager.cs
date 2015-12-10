@@ -4,8 +4,10 @@ using System.Collections.Generic;
 
 public class GameViewManager : ViewManager
 {
-	[SerializeField]
-	private GameManager gameManager;
+	private GameManager gameManager
+	{
+		get {return gameObject.GetComponent<GameManager>();}
+	}
 
 	[SerializeField]
 	private Transform uiBaseTransform;
