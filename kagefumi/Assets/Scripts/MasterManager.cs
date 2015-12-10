@@ -36,7 +36,7 @@ public class MasterManager : GameMonoBehaviour
 
 #if UNITY_EDITOR
 		// For Debug
-		currentView = View.Game;
+		// currentView = View.Game;
 #endif
 
 		ChangeView();
