@@ -9,6 +9,11 @@ public class GameManager : GameMonoBehaviour
 		get {return GetComponent<StageManager>();}
 	}
 
+	private LightManager lightManager
+	{
+		get {return GetComponent<LightManager>();}
+	}
+
 	[SerializeField]
 	private GameObject mainCharacterPrefab;
 	private MainCharacter mainCharacter;
@@ -18,8 +23,6 @@ public class GameManager : GameMonoBehaviour
 	{
 		stageManager.Init();
 		InitMainCharacter();
-
-		PrepareGame();
 	}
 
 	private void InitMainCharacter()
@@ -30,14 +33,27 @@ public class GameManager : GameMonoBehaviour
 			characterTransform.SetParent(transform);
 			characterTransform.MoveY(characterTransform.localScale.y);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
+			mainCharacter.onUpdate += CharacterOnUpdate;
 		}
 
 		Camera.main.gameObject.GetComponent<CharacterCamera>().SetCharacter(mainCharacter.transform);
 	}
-#endregion
 
 	public void PrepareGame()
 	{
-
+		lightManager.Init(stageManager.stageObjects);
 	}
+#endregion
+
+#region Event
+	private void CharacterOnUpdate(Vector3 characterPosition)
+	{
+		BaseObject shadowObject = lightManager.GetShadowObject(characterPosition);
+
+		if (shadowObject != null)
+		{
+
+		}
+	}
+#endregion
 }
