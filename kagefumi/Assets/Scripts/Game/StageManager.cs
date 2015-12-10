@@ -10,6 +10,20 @@ public class StageManager : GameMonoBehaviour
 	private Transform baseStagePrefab;
 	private Transform baseStageTransform;
 
+	private BaseObject[] stageObjects_;
+	public BaseObject[] stageObjects
+	{
+		get
+		{
+			if (stageObjects_ == null)
+			{
+				stageObjects_ = stageGameObject.GetComponentsInChildren<BaseObject>();
+			}
+
+			return stageObjects_;
+		}
+	}
+
 	private const string STAGE_PREFAB_PATH = "Prefabs/Stages/";
 
 	public void Init()
@@ -31,6 +45,7 @@ public class StageManager : GameMonoBehaviour
 
 	private void InstantiateStage(int id)
 	{
+		stageObjects_ = null;
 		InstantiateBaseStage();
 
 		if (stageGameObject != null)

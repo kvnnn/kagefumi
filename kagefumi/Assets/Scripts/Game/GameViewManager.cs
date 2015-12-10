@@ -18,6 +18,11 @@ public class GameViewManager : ViewManager
 		InitUI();
 	}
 
+	protected override void AfterShow()
+	{
+		gameManager.PrepareGame();
+	}
+
 	private void InitUI()
 	{
 
