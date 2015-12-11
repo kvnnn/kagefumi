@@ -77,6 +77,8 @@ public class GameManager : GameMonoBehaviour
 
 			characterCamera.SetCharacter(mainCharacter.transform);
 		}
+
+		lightManager.UpdateShadowData();
 	}
 #endregion
 }
