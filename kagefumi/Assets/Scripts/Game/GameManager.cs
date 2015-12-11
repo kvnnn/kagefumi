@@ -14,6 +14,11 @@ public class GameManager : GameMonoBehaviour
 		get {return GetComponent<LightManager>();}
 	}
 
+	private CharacterCamera characterCamera
+	{
+		get {return Camera.main.gameObject.GetComponent<CharacterCamera>();}
+	}
+
 	[SerializeField]
 	private GameObject mainCharacterPrefab;
 	private MainCharacter mainCharacter;
@@ -38,7 +43,7 @@ public class GameManager : GameMonoBehaviour
 			mainCharacter.onUpdate += CharacterOnUpdate;
 		}
 
-		Camera.main.gameObject.GetComponent<CharacterCamera>().SetCharacter(mainCharacter.transform);
+		characterCamera.SetCharacter(mainCharacter.transform);
 	}
 
 	public void PrepareGame()
@@ -58,6 +63,20 @@ public class GameManager : GameMonoBehaviour
 	{
 		if (diveTarget == null) {return;}
 
+		if (mainCharacter.isActive)
+		{
+			mainCharacter.SetActive(false);
+			diveTarget.Dive();
+
+			characterCamera.SetCharacter(diveTarget.transform);
+		}
+		else
+		{
+			mainCharacter.SetActive(true);
+			diveTarget.GetOut();
+
+			characterCamera.SetCharacter(mainCharacter.transform);
+		}
 	}
 #endregion
 }

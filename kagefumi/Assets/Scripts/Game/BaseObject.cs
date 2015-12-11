@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,11 +7,42 @@ public class BaseObject : GameMonoBehaviour
 {
 	public List<Vector2> shadowPointList {get; private set;}
 
+	private MainCharacter mainCharacter
+	{
+		get {return GetComponent<MainCharacter>();}
+	}
+
 	private void Awake()
 	{
 		shadowPointList = new List<Vector2>();
 	}
 
+	public void Dive()
+	{
+		if (mainCharacter == null)
+		{
+			gameObject.AddComponent<MainCharacter>();
+			SetShadow(false);
+		}
+	}
+
+	public void GetOut()
+	{
+		if (mainCharacter)
+		{
+			Destroy(mainCharacter);
+			SetShadow(true);
+		}
+	}
+
+	private void SetShadow(bool hasShadow)
+	{
+		Renderer renderer = GetComponent<Renderer>();
+		renderer.receiveShadows = hasShadow;
+		renderer.shadowCastingMode = hasShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
+	}
+
+#region Shadow
 	public void UpdateShadowBounds(Vector3 lightPosition, float lightRange)
 	{
 		shadowPointList.Clear();
@@ -69,4 +101,5 @@ public class BaseObject : GameMonoBehaviour
 			}
 		}
 	}
+#endregion
 }
