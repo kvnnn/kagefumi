@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
-	public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+	public class Joystick : MonoBehaviour
 	{
 		public enum AxisOption
 		{
@@ -27,8 +27,13 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		void OnEnable()
 		{
+			UnityEngine.Debug.LogError("enable");
 			m_StartPos = transform.position;
-			CreateVirtualAxes();
+		}
+
+		public void SetStartPosition(Vector3 startPosition)
+		{
+			m_StartPos = startPosition;
 		}
 
 		void UpdateVirtualAxes(Vector3 value)
@@ -47,7 +52,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 			}
 		}
 
-		void CreateVirtualAxes()
+		public void CreateVirtualAxes()
 		{
 			// set axes to use
 			m_UseX = (axesToUse == AxisOption.Both || axesToUse == AxisOption.OnlyHorizontal);
