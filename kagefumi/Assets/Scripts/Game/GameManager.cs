@@ -56,6 +56,17 @@ public class GameManager : GameMonoBehaviour
 	private void CharacterOnUpdate(Vector3 characterPosition)
 	{
 		BaseObject shadowObject = lightManager.GetShadowObject(characterPosition);
+
+		if (shadowObject != null && diveTarget != shadowObject)
+		{
+			shadowObject.StartBlink();
+		}
+
+		if (diveTarget != null && diveTarget != shadowObject)
+		{
+			diveTarget.StopBlink();
+		}
+
 		diveTarget = shadowObject;
 	}
 
