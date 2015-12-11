@@ -15,8 +15,6 @@ public class BaseObject : GameMonoBehaviour
 	}
 
 	private const float FADE_SPEED = 0.5f;
-	private readonly Vector3 ALPHA_FADE_OUT = new Vector3(0.2f, 0f, 0f);
-	private readonly Vector3 ALPHA_FADE_IN = new Vector3(1f, 0f, 0f);
 
 	private void Awake()
 	{
