@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -36,6 +37,13 @@ public class MainCharacter : GameMonoBehaviour
 		if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {moveDirection.z = -1;}
 		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {moveDirection.x = 1;}
 #endif
+
+		float x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
+		float z = CrossPlatformInputManager.GetAxisRaw("Vertical");
+		if (x != 0 && z != 0)
+		{
+			moveDirection = new Vector3(x, 0f, z).normalized;
+		}
 
 		if (moveDirection != Vector3.zero)
 		{
