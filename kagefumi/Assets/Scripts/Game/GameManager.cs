@@ -18,6 +18,8 @@ public class GameManager : GameMonoBehaviour
 	private GameObject mainCharacterPrefab;
 	private MainCharacter mainCharacter;
 
+	private BaseObject diveTarget = null;
+
 #region Init
 	public void InitGame()
 	{
@@ -49,11 +51,13 @@ public class GameManager : GameMonoBehaviour
 	private void CharacterOnUpdate(Vector3 characterPosition)
 	{
 		BaseObject shadowObject = lightManager.GetShadowObject(characterPosition);
+		diveTarget = shadowObject;
+	}
 
-		if (shadowObject != null)
-		{
+	public void OnDoubleTap()
+	{
+		if (diveTarget == null) {return;}
 
-		}
 	}
 #endregion
 }
