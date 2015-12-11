@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UnityStandardAssets.CrossPlatformInput
 {
-	public class Joystick : MonoBehaviour
+	public class Joystick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 	{
 		public enum AxisOption
 		{
@@ -24,12 +24,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 		bool m_UseY; // Toggle for using the Y axis
 		CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
 		CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
-
-		void OnEnable()
-		{
-			UnityEngine.Debug.LogError("enable");
-			m_StartPos = transform.position;
-		}
 
 		public void SetStartPosition(Vector3 startPosition)
 		{
@@ -100,20 +94,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 			UpdateVirtualAxes(m_StartPos);
 		}
 
-
 		public void OnPointerDown(PointerEventData data) { }
-
-		void OnDisable()
-		{
-			// remove the joysticks from the cross platform input
-			if (m_UseX)
-			{
-				m_HorizontalVirtualAxis.Remove();
-			}
-			if (m_UseY)
-			{
-				m_VerticalVirtualAxis.Remove();
-			}
-		}
 	}
 }
