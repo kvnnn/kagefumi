@@ -30,6 +30,8 @@ public class GameManager : GameMonoBehaviour
 	{
 		stageManager.Init();
 		InitMainCharacter();
+
+		characterCamera.Init(mainCharacter.transform);
 	}
 
 	private void InitMainCharacter()
@@ -42,8 +44,6 @@ public class GameManager : GameMonoBehaviour
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
 			mainCharacter.onUpdate += CharacterOnUpdate;
 		}
-
-		characterCamera.SetCharacter(mainCharacter.transform);
 	}
 
 	public void PrepareGame()
