@@ -10,22 +10,21 @@ public class GameViewManager : ViewManager
 	}
 
 	[SerializeField]
-	private Transform uiBaseTransform;
+	private GameUIManager gameUIManager;
+	private Transform uiBaseTransform
+	{
+		get {return gameUIManager.transform;}
+	}
 
 	protected override void BeforeShow()
 	{
+		gameUIManager.Init(gameManager.OnDoubleTap);
 		gameManager.InitGame();
-		InitUI();
 	}
 
 	protected override void AfterShow()
 	{
 		gameManager.PrepareGame();
-	}
-
-	private void InitUI()
-	{
-
 	}
 
 	private T InstantiateUI<T>(GameObject prefab)

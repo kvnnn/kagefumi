@@ -11,6 +11,16 @@ public class MainCharacter : GameMonoBehaviour
 		get {return GetComponent<CharacterController>();}
 	}
 
+	public bool isActive
+	{
+		get {return gameObject.activeSelf;}
+	}
+
+	public void SetActive(bool active)
+	{
+		gameObject.SetActive(active);
+	}
+
 	public bool isDead
 	{
 		get {return gameObject == null;}
@@ -44,12 +54,22 @@ public class MainCharacter : GameMonoBehaviour
 		{
 			moveDirection = transform.TransformDirection(moveDirection);
 			moveDirection *= 5.0f;
-			controller.Move(moveDirection * Time.deltaTime);
+			moveDirection *= Time.deltaTime;
+
+			if (controller != null)
+			{
+				MoveByCharacterController(moveDirection);
+			}
 
 			if (onUpdate != null)
 			{
 				onUpdate(transform.position);
 			}
 		}
+	}
+
+	private void MoveByCharacterController(Vector3 direction)
+	{
+		controller.Move(direction);
 	}
 }
