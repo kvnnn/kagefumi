@@ -67,6 +67,7 @@ GameObject:
   - 114: {fileID: 11413622}
   - 114: {fileID: 11461862}
   - 114: {fileID: 11451736}
+  - 114: {fileID: 11449844}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -228,6 +229,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11449844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75036fc926ac04fdb9e56f0b595dc6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStagePrefab: {fileID: 466632, guid: 8fef76ac3539c4e00bfea52ddc438a21, type: 2}
 --- !u!114 &11451736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50dccdb9414704927af7d681600b3fe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStagePrefab: {fileID: 466632, guid: 8fef76ac3539c4e00bfea52ddc438a21, type: 2}
 --- !u!222 &22200978
 CanvasRenderer:
   m_ObjectHideFlags: 1

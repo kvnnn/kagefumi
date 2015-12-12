@@ -6,9 +6,10 @@ public class StageManager : GameMonoBehaviour
 {
 	private GameObject stageGameObject;
 
-	[SerializeField]
-	private Transform baseStagePrefab;
-	private Transform baseStageTransform;
+	private StageCreator creator
+	{
+		get {return GetComponent<StageCreator>();}
+	}
 
 	private BaseObject[] stageObjects_;
 	public BaseObject[] stageObjects
@@ -24,8 +25,6 @@ public class StageManager : GameMonoBehaviour
 		}
 	}
 
-	private const string STAGE_PREFAB_PATH = "Prefabs/Stages/";
-
 	public void Init()
 	{
 		SetStage();
@@ -40,29 +39,16 @@ public class StageManager : GameMonoBehaviour
 		stageId = 0;
 #endif
 
-		InstantiateStage(stageId);
+		DestoryStageIfExist();
+		stageGameObject = creator.Create(stageId);
 	}
 
-	private void InstantiateStage(int id)
+	private void DestoryStageIfExist()
 	{
-		stageObjects_ = null;
-		InstantiateBaseStage();
-
 		if (stageGameObject != null)
 		{
+			stageObjects_ = null;
 			Destroy(stageGameObject);
-		}
-
-		stageGameObject = Instantiate(Resources.Load<GameObject>(STAGE_PREFAB_PATH + id));
-		stageGameObject.transform.SetParent(baseStageTransform);
-	}
-
-	private void InstantiateBaseStage()
-	{
-		if (baseStageTransform == null)
-		{
-			baseStageTransform = Instantiate(baseStagePrefab).transform;
-			baseStageTransform.transform.SetParent(transform);
 		}
 	}
 }
