@@ -12,6 +12,14 @@ public class MainCharacterController : GameMonoBehaviour
 		get {return GetComponent<CharacterController>();}
 	}
 
+	private void OnEnable()
+	{
+		if (onUpdate != null)
+		{
+			onUpdate(transform.position);
+		}
+	}
+
 	private void Update()
 	{
 		Vector3 moveDirection = Vector3.zero;
