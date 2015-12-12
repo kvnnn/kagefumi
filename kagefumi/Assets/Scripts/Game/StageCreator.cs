@@ -12,6 +12,8 @@ public class StageCreator : GameMonoBehaviour
 	private const string STAGE_PREFAB_PATH = "Prefabs/Stages/";
 	private const string STAGE_JSON_PATH = "Stages/";
 
+	private const string DEBUG_STAGE = "DebugStage";
+
 	public GameObject Create(int stageId)
 	{
 		return InstantiateStage(stageId);
@@ -83,4 +85,14 @@ public class StageCreator : GameMonoBehaviour
 
 		return objectsJson;
 	}
+
+#if UNITY_EDITOR
+	public GameObject CreateDebugStage()
+	{
+		InstantiateBaseStage();
+		GameObject stageGameObject = Instantiate(Resources.Load<GameObject>(STAGE_PREFAB_PATH + DEBUG_STAGE));
+		stageGameObject.transform.SetParent(baseStageTransform);
+		return stageGameObject;
+	}
+#endif
 }

@@ -34,13 +34,17 @@ public class StageManager : GameMonoBehaviour
 	{
 		int stageId = 0;
 
+		DestoryStageIfExist();
+
 #if UNITY_EDITOR
 		// For Debug
 		stageId = 0;
-#endif
 
-		DestoryStageIfExist();
+		// stageGameObject = creator.Create(stageId);
+		stageGameObject = creator.CreateDebugStage();
+#else
 		stageGameObject = creator.Create(stageId);
+#endif
 	}
 
 	private void DestoryStageIfExist()
