@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class MainCharacter : GameMonoBehaviour
 {
+	private bool hasKey = false;
+
 	public bool isActive
 	{
 		get {return gameObject.activeSelf;}
@@ -25,14 +27,37 @@ public class MainCharacter : GameMonoBehaviour
 		get {return gameObject == null;}
 	}
 
+	private void GetKey(KeyTrigger key)
+	{
+		key.Get();
+		hasKey = true;
+	}
+
+	private void OpenDoor()
+	{
+		if (hasKey)
+		{
+			Debug.Log("clear");
+		}
+		else
+		{
+			Debug.Log("no key");
+		}
+	}
+
 #region Event
 	private void OnTriggerEnter(Collider collider)
 	{
 		GameObject triggerGameObject = collider.gameObject;
-		Key key = triggerGameObject.GetComponent<Key>();
-		if (key != null)
+		BaseTrigger trigger = triggerGameObject.GetComponent<BaseTrigger>();
+
+		if (trigger is KeyTrigger)
 		{
-			key.Get();
+			GetKey(trigger as KeyTrigger);
+		}
+		else if (trigger is DoorTrigger)
+		{
+			OpenDoor();
 		}
 	}
 #endregion

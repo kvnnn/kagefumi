@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Key : GameMonoBehaviour
+public class KeyTrigger : BaseTrigger
 {
 	public void Get()
 	{
