@@ -10,6 +10,9 @@ public class PauseMenuParts : BaseUIParts
 	[SerializeField]
 	private ButtonParts pauseButtonParts;
 
+	public System.Action onPause;
+	public System.Action onResume;
+
 	public void Show()
 	{
 		pauseMenuBaseGameObject.SetActive(true);
@@ -22,7 +25,8 @@ public class PauseMenuParts : BaseUIParts
 
 	private void Pause()
 	{
-		Time.timeScale = 0;
+
+		onPause();
 		pauseButtonParts.isEnabled = false;
 
 		Show();
@@ -30,7 +34,7 @@ public class PauseMenuParts : BaseUIParts
 
 	private void Resume()
 	{
-		Time.timeScale = 1;
+		onResume();
 		pauseButtonParts.isEnabled = true;
 
 		Hide();

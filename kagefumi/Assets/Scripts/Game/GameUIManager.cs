@@ -9,6 +9,8 @@ public class GameUIManager : GameMonoBehaviour
 	[SerializeField]
 	private List<GameObject> uiPartsPrefabs;
 
+	public bool isPause {get; private set;}
+
 	private TapDetector tapDetector_;
 	private TapDetector tapDetector
 	{
@@ -35,6 +37,19 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
+	private PauseMenuParts pauseMenuParts_;
+	private PauseMenuParts pauseMenuParts
+	{
+		get
+		{
+			if (pauseMenuParts_ == null)
+			{
+				pauseMenuParts_ = GetComponentInChildren<PauseMenuParts>();
+			}
+			return pauseMenuParts_;
+		}
+	}
+
 	public void Init(System.Action onDoubleTap)
 	{
 		InitializeUIParts();
@@ -45,6 +60,10 @@ public class GameUIManager : GameMonoBehaviour
 
 		HideJoystick();
 		joystick.CreateVirtualAxes();
+
+		isPause = false;
+		pauseMenuParts.onPause = OnPause;
+		pauseMenuParts.onResume = OnResume;
 	}
 
 	private void InitializeUIParts()
@@ -77,6 +96,7 @@ public class GameUIManager : GameMonoBehaviour
 #region Event
 	private void OnDrag(PointerEventData eventData)
 	{
+		if (isPause) {return;}
 		ShowJoystick(eventData.position);
 		joystick.OnDrag(eventData);
 	}
@@ -85,6 +105,18 @@ public class GameUIManager : GameMonoBehaviour
 	{
 		HideJoystick();
 		joystick.OnPointerUp(eventData);
+	}
+
+	private void OnPause()
+	{
+		Time.timeScale = 0;
+		isPause = true;
+	}
+
+	private void OnResume()
+	{
+		Time.timeScale = 1;
+		isPause = false;
 	}
 #endregion
 }
