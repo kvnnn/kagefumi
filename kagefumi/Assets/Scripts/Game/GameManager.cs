@@ -85,6 +85,7 @@ public class GameManager : GameMonoBehaviour
 		{
 			mainCharacter.SetActive(true);
 			diveTarget.GetOut();
+			diveTarget = null;
 
 			characterCamera.SetCharacter(mainCharacter.transform);
 		}
