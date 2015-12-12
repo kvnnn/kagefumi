@@ -92,9 +92,10 @@ public class GameManager : GameMonoBehaviour
 		}
 		else
 		{
-			mainCharacter.SetActive(true);
 			diveTarget.GetOut();
 			diveTarget = null;
+
+			mainCharacter.SetActive(true);
 
 			characterCamera.SetCharacter(mainCharacter.transform);
 		}
