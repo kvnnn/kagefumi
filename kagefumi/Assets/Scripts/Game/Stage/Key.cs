@@ -5,5 +5,8 @@ using System.Collections.Generic;
 
 public class Key : GameMonoBehaviour
 {
-
+	public void Get()
+	{
+		Destroy(gameObject);
+	}
 }

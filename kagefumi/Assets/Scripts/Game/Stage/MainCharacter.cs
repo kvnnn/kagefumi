@@ -67,4 +67,16 @@ public class MainCharacter : GameMonoBehaviour
 	{
 		controller.Move(direction);
 	}
+
+#region Event
+	private void OnTriggerEnter(Collider collider)
+	{
+		GameObject triggerGameObject = collider.gameObject;
+		Key key = triggerGameObject.GetComponent<Key>();
+		if (key != null)
+		{
+			key.Get();
+		}
+	}
+#endregion
 }
