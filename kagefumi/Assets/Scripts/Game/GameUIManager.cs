@@ -6,6 +6,12 @@ using System.Collections.Generic;
 
 public class GameUIManager : GameMonoBehaviour
 {
+	[SerializeField]
+	private List<GameObject> uiPartsPrefabs;
+
+	public bool isPause {get; private set;}
+	private System.Action onHomeButtonClick;
+
 	private TapDetector tapDetector_;
 	private TapDetector tapDetector
 	{
@@ -19,17 +25,65 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
-	[SerializeField]
-	private Joystick joystick;
-
-	public void Init(System.Action onDoubleTap)
+	private Joystick joystick_;
+	private Joystick joystick
 	{
+		get
+		{
+			if (joystick_ == null)
+			{
+				joystick_ = GetComponentInChildren<Joystick>();
+			}
+			return joystick_;
+		}
+	}
+
+	private PauseMenuParts pauseMenuParts_;
+	private PauseMenuParts pauseMenuParts
+	{
+		get
+		{
+			if (pauseMenuParts_ == null)
+			{
+				pauseMenuParts_ = GetComponentInChildren<PauseMenuParts>();
+			}
+			return pauseMenuParts_;
+		}
+	}
+
+	public void Init(System.Action onDoubleTap, System.Action onHomeButtonClick, System.Action onRestartButtonClick)
+	{
+		InitializeUIParts();
+
 		tapDetector.onDoubleTap = onDoubleTap;
 		tapDetector.onUp = OnUp;
 		tapDetector.onDrag = OnDrag;
 
 		HideJoystick();
-		joystick.CreateVirtualAxes();
+		if (!CrossPlatformInputManager.AxisExists("Horizontal") && !CrossPlatformInputManager.AxisExists("Vertical"))
+		{
+			joystick.CreateVirtualAxes();
+		}
+
+		isPause = false;
+		pauseMenuParts.onPause = OnPause;
+		pauseMenuParts.onResume = OnResume;
+		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
+		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
+	}
+
+	private void InitializeUIParts()
+	{
+		if (transform.childCount == 0)
+		{
+			foreach (GameObject prefab in uiPartsPrefabs)
+			{
+				RectTransform partsTransfrom = Instantiate(prefab).transform as RectTransform;
+				Vector3 position = partsTransfrom.anchoredPosition;
+				partsTransfrom.SetParent(transform);
+				partsTransfrom.anchoredPosition = position;
+			}
+		}
 	}
 
 	public void ShowJoystick(Vector3 position)
@@ -48,6 +102,7 @@ public class GameUIManager : GameMonoBehaviour
 #region Event
 	private void OnDrag(PointerEventData eventData)
 	{
+		if (isPause) {return;}
 		ShowJoystick(eventData.position);
 		joystick.OnDrag(eventData);
 	}
@@ -56,6 +111,18 @@ public class GameUIManager : GameMonoBehaviour
 	{
 		HideJoystick();
 		joystick.OnPointerUp(eventData);
+	}
+
+	private void OnPause()
+	{
+		Time.timeScale = 0;
+		isPause = true;
+	}
+
+	private void OnResume()
+	{
+		Time.timeScale = 1;
+		isPause = false;
 	}
 #endregion
 }

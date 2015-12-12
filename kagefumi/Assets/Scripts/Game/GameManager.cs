@@ -48,6 +48,7 @@ public class GameManager : GameMonoBehaviour
 
 	public void PrepareGame()
 	{
+		characterCamera.CalculateBounds();
 		lightManager.Init(stageManager.stageObjects);
 	}
 #endregion
@@ -91,6 +92,10 @@ public class GameManager : GameMonoBehaviour
 		}
 
 		lightManager.UpdateShadowData();
+	}
+
+	public void OnRestartButtonClick()
+	{
 	}
 #endregion
 }
