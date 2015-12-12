@@ -17,7 +17,6 @@ public class CharacterCamera : GameMonoBehaviour
 	public void Init(Transform target)
 	{
 		this.characterTransform = target;
-		CalculateBounds();
 	}
 
 	public void SetCharacter(Transform characterTransform)
@@ -45,7 +44,7 @@ public class CharacterCamera : GameMonoBehaviour
 		lastRotation = rotation;
 	}
 
-	private void CalculateBounds()
+	public void CalculateBounds()
 	{
 		GameObject floorGameObject = GameObject.FindWithTag("Floor");
 		Bounds bounds = floorGameObject.GetComponent<Collider>().bounds;

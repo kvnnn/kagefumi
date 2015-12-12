@@ -48,6 +48,7 @@ public class GameManager : GameMonoBehaviour
 
 	public void PrepareGame()
 	{
+		characterCamera.CalculateBounds();
 		lightManager.Init(stageManager.stageObjects);
 	}
 #endregion

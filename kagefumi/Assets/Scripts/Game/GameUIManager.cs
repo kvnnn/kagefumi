@@ -60,7 +60,10 @@ public class GameUIManager : GameMonoBehaviour
 		tapDetector.onDrag = OnDrag;
 
 		HideJoystick();
-		joystick.CreateVirtualAxes();
+		if (!CrossPlatformInputManager.AxisExists("Horizontal") && !CrossPlatformInputManager.AxisExists("Vertical"))
+		{
+			joystick.CreateVirtualAxes();
+		}
 
 		isPause = false;
 		pauseMenuParts.onPause = OnPause;
