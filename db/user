@@ -1,4 +1,0 @@
-drop table if exists user;
-create table user(id integer primary key, stage_id integer);
-insert into user(stage_id)
-	values(1);
