@@ -3,28 +3,13 @@ using UnityStandardAssets.CrossPlatformInput;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MainCharacter : GameMonoBehaviour
+public class MainCharacterController : GameMonoBehaviour
 {
 	public System.Action<Vector3> onUpdate;
 
 	private CharacterController controller
 	{
 		get {return GetComponent<CharacterController>();}
-	}
-
-	public bool isActive
-	{
-		get {return gameObject.activeSelf;}
-	}
-
-	public void SetActive(bool active)
-	{
-		gameObject.SetActive(active);
-	}
-
-	public bool isDead
-	{
-		get {return gameObject == null;}
 	}
 
 	private void Update()

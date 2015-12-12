@@ -10,11 +10,6 @@ public class CharacterCamera : GameMonoBehaviour
 	private Vector3 min;
 	private Vector3 max;
 
-	private Camera camera
-	{
-		get {return GetComponent<Camera>();}
-	}
-
 	private const float CAMERA_SPEED = 5.0f;
 	private const float CAMERA_ANGLE_X = 30f;
 	private const float OFFSET = 1.0f;
@@ -38,8 +33,8 @@ public class CharacterCamera : GameMonoBehaviour
 		rotation.eulerAngles = new Vector3(CAMERA_ANGLE_X, rotation.eulerAngles.y, 0f);
 		rotation = Quaternion.Slerp(transform.rotation, rotation, CAMERA_SPEED * Time.deltaTime);
 
-		Vector3 minPos = camera.WorldToViewportPoint(min);
-		Vector3 maxPos = camera.WorldToViewportPoint(max);
+		Vector3 minPos = GetComponent<Camera>().WorldToViewportPoint(min);
+		Vector3 maxPos = GetComponent<Camera>().WorldToViewportPoint(max);
 
 		if ((minPos.x > 0f && rotation.y < lastRotation.y) || (maxPos.x < 1.0f && rotation.y > lastRotation.y))
 		{

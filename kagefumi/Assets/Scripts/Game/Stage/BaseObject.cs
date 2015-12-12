@@ -9,9 +9,9 @@ public class BaseObject : GameMonoBehaviour
 
 	private LTDescr alphaTween;
 
-	private MainCharacter mainCharacter
+	private MainCharacterController mainCharacterController
 	{
-		get {return GetComponent<MainCharacter>();}
+		get {return GetComponent<MainCharacterController>();}
 	}
 
 	private const float FADE_SPEED = 0.5f;
@@ -23,19 +23,19 @@ public class BaseObject : GameMonoBehaviour
 
 	public void Dive()
 	{
-		if (mainCharacter == null)
+		if (mainCharacterController == null)
 		{
 			StopBlink();
-			gameObject.AddComponent<MainCharacter>();
+			gameObject.AddComponent<MainCharacterController>();
 			SetShadow(false);
 		}
 	}
 
 	public void GetOut()
 	{
-		if (mainCharacter)
+		if (mainCharacterController)
 		{
-			Destroy(mainCharacter);
+			Destroy(mainCharacterController);
 			SetShadow(true);
 		}
 	}

@@ -42,7 +42,7 @@ public class GameManager : GameMonoBehaviour
 			characterTransform.SetParent(transform);
 			characterTransform.MoveY(characterTransform.localScale.y);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
-			mainCharacter.onUpdate += CharacterOnUpdate;
+			mainCharacter.Init(CharacterOnUpdate);
 		}
 	}
 
