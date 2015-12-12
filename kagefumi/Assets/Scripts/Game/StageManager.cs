@@ -11,6 +11,11 @@ public class StageManager : GameMonoBehaviour
 		get {return GetComponent<StageCreator>();}
 	}
 
+	public Vector3 characterDefaultPosition
+	{
+		get {return creator.characterDefaultPosition;}
+	}
+
 	private BaseObject[] stageObjects_;
 	public BaseObject[] stageObjects
 	{
