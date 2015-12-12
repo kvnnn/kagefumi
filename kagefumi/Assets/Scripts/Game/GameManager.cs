@@ -29,21 +29,22 @@ public class GameManager : GameMonoBehaviour
 	public void InitGame()
 	{
 		stageManager.Init();
-		InitMainCharacter();
+		InitMainCharacter(stageManager.characterDefaultPosition);
 
 		characterCamera.Init(mainCharacter.transform);
 	}
 
-	private void InitMainCharacter()
+	private void InitMainCharacter(Vector3 characterDefaultPosition)
 	{
 		if (mainCharacter == null || mainCharacter.isDead)
 		{
 			Transform characterTransform = Instantiate(mainCharacterPrefab).transform;
 			characterTransform.SetParent(transform);
-			characterTransform.MoveY(characterTransform.localScale.y);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
 			mainCharacter.Init(CharacterOnUpdate);
 		}
+
+		mainCharacter.transform.position = characterDefaultPosition;
 	}
 
 	public void PrepareGame()

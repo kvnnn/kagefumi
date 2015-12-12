@@ -9,6 +9,8 @@ public class StageCreator : GameMonoBehaviour
 	private Transform baseStagePrefab;
 	private Transform baseStageTransform;
 
+	public Vector3 characterDefaultPosition {get; private set;}
+
 	private const string STAGE_PREFAB_PATH = "Prefabs/Stages/";
 	private const string STAGE_JSON_PATH = "Stages/";
 
@@ -75,15 +77,22 @@ public class StageCreator : GameMonoBehaviour
 	{
 		TextAsset stageJson = Resources.Load(STAGE_JSON_PATH + id) as TextAsset;
 		string stageJsonText = stageJson.text;
-		List<object> json = Json.Deserialize(stageJsonText) as List<object>;
+		Dictionary<string, object> json = Json.Deserialize(stageJsonText) as Dictionary<string, object>;
+
+		SetCharacterDefaultPosition(CustomVector.ConvertStringToVector3(json["character"] as string));
 
 		List<Dictionary<string, object>> objectsJson = new List<Dictionary<string, object>>();
-		foreach (object obj in json)
+		foreach (object obj in json["objects"] as List<object>)
 		{
 			objectsJson.Add(obj as Dictionary<string, object>);
 		}
 
 		return objectsJson;
+	}
+
+	private void SetCharacterDefaultPosition(Vector3 characterDefaultPosition)
+	{
+		this.characterDefaultPosition = characterDefaultPosition;
 	}
 
 #if UNITY_EDITOR
@@ -92,6 +101,9 @@ public class StageCreator : GameMonoBehaviour
 		InstantiateBaseStage();
 		GameObject stageGameObject = Instantiate(Resources.Load<GameObject>(STAGE_PREFAB_PATH + DEBUG_STAGE));
 		stageGameObject.transform.SetParent(baseStageTransform);
+
+		characterDefaultPosition = new Vector3(0f, 1f, 0f);
+
 		return stageGameObject;
 	}
 #endif
