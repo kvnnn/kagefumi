@@ -12,6 +12,8 @@ public class PauseMenuParts : BaseUIParts
 
 	public System.Action onPause;
 	public System.Action onResume;
+	public System.Action onHomeButtonClick;
+	public System.Action onRestartButtonClick;
 
 	public void Show()
 	{
@@ -53,12 +55,12 @@ public class PauseMenuParts : BaseUIParts
 
 	public void OnHomeButtonClick()
 	{
-
+		onHomeButtonClick();
 	}
 
 	public void OnRestartButtonClick()
 	{
-
+		onRestartButtonClick();
 	}
 #endregion
 }

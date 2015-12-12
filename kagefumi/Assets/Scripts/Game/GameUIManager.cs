@@ -10,6 +10,7 @@ public class GameUIManager : GameMonoBehaviour
 	private List<GameObject> uiPartsPrefabs;
 
 	public bool isPause {get; private set;}
+	private System.Action onHomeButtonClick;
 
 	private TapDetector tapDetector_;
 	private TapDetector tapDetector
@@ -50,7 +51,7 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
-	public void Init(System.Action onDoubleTap)
+	public void Init(System.Action onDoubleTap, System.Action onHomeButtonClick, System.Action onRestartButtonClick)
 	{
 		InitializeUIParts();
 
@@ -64,6 +65,8 @@ public class GameUIManager : GameMonoBehaviour
 		isPause = false;
 		pauseMenuParts.onPause = OnPause;
 		pauseMenuParts.onResume = OnResume;
+		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
+		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
 	}
 
 	private void InitializeUIParts()

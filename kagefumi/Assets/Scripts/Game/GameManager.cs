@@ -92,5 +92,9 @@ public class GameManager : GameMonoBehaviour
 
 		lightManager.UpdateShadowData();
 	}
+
+	public void OnRestartButtonClick()
+	{
+	}
 #endregion
 }
