@@ -17,6 +17,11 @@ public class MainCharacter : GameMonoBehaviour
 		GetComponent<MainCharacterController>().onUpdate = onUpdate;
 	}
 
+	public void Reset()
+	{
+		hasKey = false;
+	}
+
 	public void SetActive(bool active)
 	{
 		gameObject.SetActive(active);
