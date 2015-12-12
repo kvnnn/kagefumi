@@ -44,6 +44,7 @@ public class GameManager : GameMonoBehaviour
 			mainCharacter.Init(CharacterOnUpdate);
 		}
 
+		mainCharacter.Reset();
 		mainCharacter.transform.position = characterDefaultPosition;
 	}
 
@@ -51,6 +52,12 @@ public class GameManager : GameMonoBehaviour
 	{
 		characterCamera.CalculateBounds();
 		lightManager.Init(stageManager.stageObjects);
+	}
+
+	private void Restart()
+	{
+		InitGame();
+		PrepareGame();
 	}
 #endregion
 
@@ -97,6 +104,7 @@ public class GameManager : GameMonoBehaviour
 
 	public void OnRestartButtonClick()
 	{
+		Restart();
 	}
 #endregion
 }
