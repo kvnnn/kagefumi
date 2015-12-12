@@ -55,11 +55,13 @@ public class PauseMenuParts : BaseUIParts
 
 	public void OnHomeButtonClick()
 	{
+		Resume();
 		onHomeButtonClick();
 	}
 
 	public void OnRestartButtonClick()
 	{
+		Resume();
 		onRestartButtonClick();
 	}
 #endregion
