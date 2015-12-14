@@ -44,13 +44,6 @@ public class BaseObject : GameMonoBehaviour
 
 	protected virtual void OnGetOut() {}
 
-	private void SetShadow(bool hasShadow)
-	{
-		Renderer renderer = GetComponent<Renderer>();
-		renderer.receiveShadows = hasShadow;
-		renderer.shadowCastingMode = hasShadow ? ShadowCastingMode.On : ShadowCastingMode.Off;
-	}
-
 #region Tween
 	public void StartBlink()
 	{
