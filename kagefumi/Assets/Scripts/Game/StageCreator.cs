@@ -32,6 +32,7 @@ public class StageCreator : GameMonoBehaviour
 		foreach (Dictionary<string, object> json in ParseStageJson(id))
 		{
 			Transform objectTransform = InstantiateObject(json);
+			if (objectTransform == null) {continue;}
 			objectTransform.SetParent(stageTransform);
 		}
 
@@ -41,7 +42,10 @@ public class StageCreator : GameMonoBehaviour
 	private Transform InstantiateObject(Dictionary<string, object> json)
 	{
 		string name = json["name"] as string;
-		Transform objectTransform = Instantiate(Resources.Load<GameObject>(STAGE_PREFAB_PATH + name)).transform;
+		GameObject objectGameObject = Instantiate(Resources.Load<GameObject>(STAGE_PREFAB_PATH + name));
+
+		if (objectGameObject == null) {return null;}
+		Transform objectTransform = objectGameObject.transform;
 
 		if (json.ContainsKey("position"))
 		{
@@ -59,6 +63,16 @@ public class StageCreator : GameMonoBehaviour
 		{
 			Vector3 scale = CustomVector.ConvertStringToVector3(json["scale"] as string);
 			objectTransform.localScale = scale;
+		}
+
+		if (json.ContainsKey("text"))
+		{
+			string text = json["text"] as string;
+			SignboardObject signboard = objectTransform.GetComponent<SignboardObject>();
+			if (signboard != null)
+			{
+				signboard.SetText(text);
+			}
 		}
 
 		return objectTransform;
