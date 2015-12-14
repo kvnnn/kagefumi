@@ -27,7 +27,6 @@ public class BaseObject : GameMonoBehaviour
 		{
 			StopBlink();
 			gameObject.AddComponent<MainCharacterController>();
-			SetShadow(false);
 		}
 	}
 
@@ -38,7 +37,6 @@ public class BaseObject : GameMonoBehaviour
 		if (mainCharacterController)
 		{
 			Destroy(mainCharacterController);
-			SetShadow(true);
 		}
 	}
 
