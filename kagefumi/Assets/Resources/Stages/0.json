@@ -20,5 +20,10 @@
 			"position" : "2.5,1,2",
 			"scale" : "1,2,1"
 		}
+		{
+			"name" : "Sign",
+			"position" : "-1, 0.5, 2.5",
+			"text" : "test test test test\ntest"
+		}
 	]
 }

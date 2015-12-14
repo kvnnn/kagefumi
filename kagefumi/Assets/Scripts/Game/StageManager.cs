@@ -45,8 +45,8 @@ public class StageManager : GameMonoBehaviour
 		// For Debug
 		stageId = 0;
 
-		// stageGameObject = creator.Create(stageId);
-		stageGameObject = creator.CreateDebugStage();
+		stageGameObject = creator.Create(stageId);
+		// stageGameObject = creator.CreateDebugStage();
 #else
 		stageGameObject = creator.Create(stageId);
 #endif

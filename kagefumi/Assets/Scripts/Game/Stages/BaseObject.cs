@@ -16,7 +16,7 @@ public class BaseObject : GameMonoBehaviour
 
 	private const float FADE_SPEED = 0.5f;
 
-	private void Awake()
+	protected virtual void Awake()
 	{
 		shadowPointList = new List<Vector2>();
 	}
@@ -31,6 +31,8 @@ public class BaseObject : GameMonoBehaviour
 		}
 	}
 
+	protected virtual void OnDive() {}
+
 	public void GetOut()
 	{
 		if (mainCharacterController)
@@ -39,6 +41,8 @@ public class BaseObject : GameMonoBehaviour
 			SetShadow(true);
 		}
 	}
+
+	protected virtual void OnGetOut() {}
 
 	private void SetShadow(bool hasShadow)
 	{
@@ -50,15 +54,21 @@ public class BaseObject : GameMonoBehaviour
 #region Tween
 	public void StartBlink()
 	{
+		OnBlinkStart();
 		LeanTween.cancel(gameObject);
 		LeanTween.alpha(gameObject, 0.5f, FADE_SPEED).setLoopPingPong().setRepeat(-1);
 	}
 
+	protected virtual void OnBlinkStart() {}
+
 	public void StopBlink()
 	{
+		OnBlinkStop();
 		LeanTween.cancel(gameObject);
 		LeanTween.alpha(gameObject, 1f, FADE_SPEED);
 	}
+
+	protected virtual void OnBlinkStop() {}
 #endregion
 
 #region Shadow
