@@ -92,6 +92,8 @@ public class GameManager : GameMonoBehaviour
 		}
 		else
 		{
+			lightManager.UpdateShadowData();
+
 			diveTarget.GetOut();
 			diveTarget = null;
 
@@ -99,8 +101,6 @@ public class GameManager : GameMonoBehaviour
 
 			characterCamera.SetCharacter(mainCharacter.transform);
 		}
-
-		lightManager.UpdateShadowData();
 	}
 
 	public void OnRestartButtonClick()
