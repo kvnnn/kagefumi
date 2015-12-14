@@ -22,42 +22,44 @@ public class MainCharacterController : GameMonoBehaviour
 
 	private void Update()
 	{
-		Vector3 moveDirection = Vector3.zero;
+		Vector3 direction = Vector3.zero;
 
 #if UNITY_EDITOR
-		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {moveDirection.z = 1;}
-		if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {moveDirection.x = -1;}
-		if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {moveDirection.z = -1;}
-		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {moveDirection.x = 1;}
+		if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) {direction.z = 1;}
+		if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) {direction.x = -1;}
+		if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {direction.z = -1;}
+		if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) {direction.x = 1;}
 #endif
 
 		float x = CrossPlatformInputManager.GetAxisRaw("Horizontal");
 		float z = CrossPlatformInputManager.GetAxisRaw("Vertical");
 		if (x != 0 && z != 0)
 		{
-			moveDirection = new Vector3(x, 0f, z).normalized;
+			direction = new Vector3(x, 0f, z).normalized;
 		}
 
-		if (moveDirection != Vector3.zero)
+		if (controller != null)
 		{
-			moveDirection = transform.TransformDirection(moveDirection);
-			moveDirection *= 5.0f;
-			moveDirection *= Time.deltaTime;
+			MoveByCharacterController(direction);
+		}
 
-			if (controller != null)
-			{
-				MoveByCharacterController(moveDirection);
-			}
-
-			if (onUpdate != null)
-			{
-				onUpdate(transform.position);
-			}
+		if (onUpdate != null)
+		{
+			onUpdate(transform.position);
 		}
 	}
 
 	private void MoveByCharacterController(Vector3 direction)
 	{
-		controller.Move(direction);
+		transform.LookAt(transform.position + direction);
+
+		Vector3 forward = Vector3.zero;
+		if (direction != Vector3.zero)
+		{
+			forward = transform.TransformDirection(Vector3.forward);
+			forward *= 5.0f;
+		}
+
+		controller.SimpleMove(forward);
 	}
 }
