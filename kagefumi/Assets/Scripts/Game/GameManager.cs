@@ -61,6 +61,26 @@ public class GameManager : GameMonoBehaviour
 	}
 #endregion
 
+#region Action
+	private void DiveToTarget()
+	{
+		mainCharacter.SetActive(false);
+		diveTarget.Dive();
+
+		characterCamera.SetCharacter(diveTarget.transform);
+	}
+
+	private void GetOutFromTarget()
+	{
+		diveTarget.GetOut();
+		diveTarget = null;
+
+		mainCharacter.SetActive(true);
+
+		characterCamera.SetCharacter(mainCharacter.transform);
+	}
+#endregion
+
 #region Event
 	private void CharacterOnUpdate(Vector3 characterPosition)
 	{
@@ -85,21 +105,11 @@ public class GameManager : GameMonoBehaviour
 
 		if (mainCharacter.isActive)
 		{
-			mainCharacter.SetActive(false);
-			diveTarget.Dive();
-
-			characterCamera.SetCharacter(diveTarget.transform);
+			DiveToTarget();
 		}
 		else
 		{
-			lightManager.UpdateShadowData();
-
-			diveTarget.GetOut();
-			diveTarget = null;
-
-			mainCharacter.SetActive(true);
-
-			characterCamera.SetCharacter(mainCharacter.transform);
+			GetOutFromTarget();
 		}
 	}
 
