@@ -116,6 +116,8 @@ public class BaseObject : GameMonoBehaviour
 
 	private void CalculateShadowPointList(List<Vector3> shadowVerts, Vector3 lightPosition, float lightRange)
 	{
+		gameObject.layer = LayerMask.NameToLayer("Default");
+
 		foreach (Vector3 vertex in shadowVerts)
 		{
 			Ray ray = new Ray(lightPosition, (vertex - lightPosition));
@@ -140,6 +142,8 @@ public class BaseObject : GameMonoBehaviour
 				}
 			}
 		}
+
+		gameObject.layer = LayerMask.NameToLayer("StageObject");
 	}
 #endregion
 }
