@@ -77,8 +77,6 @@ public class GameManager : GameMonoBehaviour
 		}
 
 		diveTarget = shadowObject;
-
-		lightManager.UpdateShadowData();
 	}
 
 	public void OnDoubleTap()
