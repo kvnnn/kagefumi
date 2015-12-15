@@ -30,6 +30,11 @@ public class LightManager : GameMonoBehaviour
 		UpdateShadowData();
 	}
 
+	private void Update()
+	{
+		UpdateShadowData();
+	}
+
 	public void UpdateShadowData()
 	{
 		foreach (ShadowDetector shadowDetector in shadowDetectors)

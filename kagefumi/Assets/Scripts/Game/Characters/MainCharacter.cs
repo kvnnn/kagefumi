@@ -50,6 +50,12 @@ public class MainCharacter : GameMonoBehaviour
 		}
 	}
 
+	public void GetOutFromObject(Vector2 shadowCentroid)
+	{
+		transform.position = new Vector3(shadowCentroid.x, transform.position.y, shadowCentroid.y);
+		SetActive(true);
+	}
+
 #region Event
 	private void OnTriggerEnter(Collider collider)
 	{

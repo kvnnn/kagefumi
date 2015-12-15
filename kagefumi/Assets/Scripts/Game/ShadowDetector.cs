@@ -153,7 +153,7 @@ public class ShadowDetector : GameMonoBehaviour
 		}
 
 		pointCount = filteredPoint.Count;
-		if (pointCount <= 2) {return;}
+		if (pointCount <= 1) {return;}
 
 		Vector2 centroid = Vector2.zero;
 		foreach (Vector2 point in filteredPoint)
