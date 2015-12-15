@@ -63,6 +63,22 @@ public class BaseObject : GameMonoBehaviour
 #endregion
 
 #region Shadow
+	public Vector2 CenterOfShadowPoint()
+	{
+		int pointCount = shadowPointList.Count;
+		if (pointCount <= 2) {return Vector2.zero;}
+
+		Vector2 centroid = Vector2.zero;
+		foreach (Vector2 point in shadowPointList)
+		{
+			centroid += point / pointCount;
+		}
+
+		centroid = shadowPointList[2];
+
+		return centroid;
+	}
+
 	public void UpdateShadowBounds(Vector3 lightPosition, float lightRange)
 	{
 		shadowPointList.Clear();
