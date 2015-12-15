@@ -114,7 +114,7 @@ public class BaseObject : GameMonoBehaviour
 				}
 
 #if UNITY_EDITOR
-				Debug.DrawRay(ray.origin, ray.direction * lightRange, Color.red);
+				Debug.DrawLine(ray.origin, hit.point, Color.blue);
 #endif
 
 				Vector2 point = new Vector2(hit.point.x, hit.point.z);

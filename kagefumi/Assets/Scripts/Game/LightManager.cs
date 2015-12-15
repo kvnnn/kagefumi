@@ -18,15 +18,6 @@ public class LightManager : GameMonoBehaviour
 		}
 	}
 
-#if UNITY_EDITOR
-	public void Update()
-	{
-		if (shadowDetectors_ == null) {return;}
-		// For Debug
-		// UpdateShadowData();
-	}
-#endif
-
 	public void Init(BaseObject[] objects)
 	{
 		shadowDetectors_ = null;
