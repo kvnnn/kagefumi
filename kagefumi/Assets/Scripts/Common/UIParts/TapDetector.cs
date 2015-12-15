@@ -10,6 +10,11 @@ public class TapDetector : BaseUIParts, IPointerDownHandler, IPointerUpHandler, 
 	public System.Action<PointerEventData> onUp;
 	public System.Action<PointerEventData> onDrag;
 
+	public void Init(Vector3 scale)
+	{
+		(transform as RectTransform).sizeDelta = scale;
+	}
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
 		if (eventData.clickCount == 2)

@@ -51,25 +51,14 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
+#region Init
 	public void Init(System.Action onDoubleTap, System.Action onHomeButtonClick, System.Action onRestartButtonClick)
 	{
 		InitializeUIParts();
 
-		tapDetector.onDoubleTap = onDoubleTap;
-		tapDetector.onUp = OnUp;
-		tapDetector.onDrag = OnDrag;
-
-		HideJoystick();
-		if (!CrossPlatformInputManager.AxisExists("Horizontal") && !CrossPlatformInputManager.AxisExists("Vertical"))
-		{
-			joystick.CreateVirtualAxes();
-		}
-
-		isPause = false;
-		pauseMenuParts.onPause = OnPause;
-		pauseMenuParts.onResume = OnResume;
-		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
-		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
+		InitTapDetector(onDoubleTap);
+		InitJoystick();
+		InitPauseMenu(onHomeButtonClick, onRestartButtonClick);
 	}
 
 	private void InitializeUIParts()
@@ -85,6 +74,33 @@ public class GameUIManager : GameMonoBehaviour
 			}
 		}
 	}
+
+	private void InitTapDetector(System.Action onDoubleTap)
+	{
+		tapDetector.Init((transform as RectTransform).sizeDelta);
+		tapDetector.onDoubleTap = onDoubleTap;
+		tapDetector.onUp = OnUp;
+		tapDetector.onDrag = OnDrag;
+	}
+
+	private void InitJoystick()
+	{
+		HideJoystick();
+		if (!CrossPlatformInputManager.AxisExists("Horizontal") && !CrossPlatformInputManager.AxisExists("Vertical"))
+		{
+			joystick.CreateVirtualAxes();
+		}
+	}
+
+	private void InitPauseMenu(System.Action onHomeButtonClick, System.Action onRestartButtonClick)
+	{
+		isPause = false;
+		pauseMenuParts.onPause = OnPause;
+		pauseMenuParts.onResume = OnResume;
+		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
+		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
+	}
+#endregion
 
 	public void ShowJoystick(Vector3 position)
 	{
