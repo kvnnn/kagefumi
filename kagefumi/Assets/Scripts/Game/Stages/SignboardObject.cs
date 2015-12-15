@@ -31,6 +31,10 @@ public class SignboardObject : BaseObject
 
 	private void ShowText()
 	{
+		Quaternion rotation = Quaternion.LookRotation(Camera.main.transform.position - textMesh.transform.position);
+		rotation.eulerAngles = new Vector3(0f, rotation.y, rotation.z);
+		textMesh.transform.rotation = rotation;
+
 		textMesh.gameObject.SetActive(true);
 	}
 
