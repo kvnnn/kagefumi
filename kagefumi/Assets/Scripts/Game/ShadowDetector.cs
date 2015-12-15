@@ -14,6 +14,8 @@ public class ShadowDetector : GameMonoBehaviour
 
 	public void UpdateShadowData()
 	{
+		if (objects == null) {return;}
+
 		foreach (BaseObject obj in objects)
 		{
 			obj.UpdateShadowBounds(transform.position, GetComponent<Light>().range);
