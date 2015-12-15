@@ -104,10 +104,14 @@ public class BaseObject : GameMonoBehaviour
 		{
 			Ray ray = new Ray(lightPosition, (vertex - lightPosition));
 			RaycastHit hit;
-			LayerMask layermask = 1<<LayerMask.NameToLayer("Room");
+			LayerMask layermask = 1<<LayerMask.NameToLayer("StageObject");
 
 			if(Physics.Raycast(ray, out hit, lightRange, layermask))
 			{
+				if (hit.transform != transform && hit.transform.GetComponent<BaseObject>() != null)
+				{
+					continue;
+				}
 
 #if UNITY_EDITOR
 				Debug.DrawRay(ray.origin, ray.direction * lightRange, Color.red);

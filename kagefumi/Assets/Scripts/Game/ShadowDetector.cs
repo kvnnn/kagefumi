@@ -49,6 +49,8 @@ public class ShadowDetector : GameMonoBehaviour
 	private bool IsOnShadow(Vector2 p, List<Vector2> pointList)
 	{
 		bool isInside = false;
+		if (pointList.Count <= 2) {return isInside;}
+
 		int j = pointList.Count - 1;
 		for (int i = 0; i < pointList.Count; j = i++)
 		{
