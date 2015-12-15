@@ -6,8 +6,7 @@ using System.Collections.Generic;
 public class BaseObject : GameMonoBehaviour
 {
 	public List<Vector2> shadowPointList {get; private set;}
-
-	private LTDescr alphaTween;
+	public Vector2 shadowCenterPoint {get; private set;}
 
 	private MainCharacterController mainCharacterController
 	{
@@ -21,6 +20,12 @@ public class BaseObject : GameMonoBehaviour
 		shadowPointList = new List<Vector2>();
 	}
 
+	public void SetLayer(string layerName)
+	{
+		gameObject.layer = LayerMask.NameToLayer(layerName);
+	}
+
+#region Action Event
 	public void Dive()
 	{
 		if (mainCharacterController == null)
@@ -41,6 +46,7 @@ public class BaseObject : GameMonoBehaviour
 	}
 
 	protected virtual void OnGetOut() {}
+#endregion
 
 #region Tween
 	public void StartBlink()
@@ -63,67 +69,14 @@ public class BaseObject : GameMonoBehaviour
 #endregion
 
 #region Shadow
-	public void UpdateShadowBounds(Vector3 lightPosition, float lightRange)
+	public void SetShadowPointList(List<Vector2> shadowPointList)
 	{
-		shadowPointList.Clear();
-
-		List<Vector3> shadowVerts = GetShadowVerts(lightPosition, lightRange);
-		CalculateShadowPointList(shadowVerts, lightPosition, lightRange);
+		this.shadowPointList = shadowPointList;
 	}
 
-	private List<Vector3> GetShadowVerts(Vector3 lightPosition, float lightRange)
+	public void SetShadowCenterPoint(Vector2 shadowCenterPoint)
 	{
-		Mesh mesh = gameObject.GetComponent<MeshFilter>().mesh;
-		Vector3[] vertices = mesh.vertices;
-		List<Vector3> shadowVerts = new List<Vector3>();
-		foreach (Vector3 vertex in vertices)
-		{
-			shadowVerts.Add(transform.TransformPoint(vertex));
-		}
-
-		foreach (Vector3 vertex in vertices)
-		{
-			Ray ray = new Ray(lightPosition, (vertex - lightPosition));
-			RaycastHit hit;
-
-			if(Physics.Raycast(ray, out hit, lightRange))
-			{
-				if(hit.collider == gameObject.GetComponent<Collider>())
-				{
-					shadowVerts.Remove(vertex);
-				}
-			}
-		}
-
-		return shadowVerts;
-	}
-
-	private void CalculateShadowPointList(List<Vector3> shadowVerts, Vector3 lightPosition, float lightRange)
-	{
-		foreach (Vector3 vertex in shadowVerts)
-		{
-			Ray ray = new Ray(lightPosition, (vertex - lightPosition));
-			RaycastHit hit;
-			LayerMask layermask = 1<<LayerMask.NameToLayer("StageObject");
-
-			if(Physics.Raycast(ray, out hit, lightRange, layermask))
-			{
-				if (hit.transform != transform && hit.transform.GetComponent<BaseObject>() != null)
-				{
-					continue;
-				}
-
-#if UNITY_EDITOR
-				Debug.DrawRay(ray.origin, ray.direction * lightRange, Color.red);
-#endif
-
-				Vector2 point = new Vector2(hit.point.x, hit.point.z);
-				if(!shadowPointList.Contains(point))
-				{
-					shadowPointList.Add(point);
-				}
-			}
-		}
+		this.shadowCenterPoint = shadowCenterPoint;
 	}
 #endregion
 }

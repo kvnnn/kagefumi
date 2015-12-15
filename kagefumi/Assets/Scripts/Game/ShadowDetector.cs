@@ -18,7 +18,7 @@ public class ShadowDetector : GameMonoBehaviour
 
 		foreach (BaseObject obj in objects)
 		{
-			obj.UpdateShadowBounds(transform.position, GetComponent<Light>().range);
+			UpdateObjectShadowBounds(obj, GetComponent<Light>().range);
 		}
 	}
 
@@ -62,4 +62,110 @@ public class ShadowDetector : GameMonoBehaviour
 
 		return isInside;
 	}
+
+#region ObjectShadow
+	public void UpdateObjectShadowBounds(BaseObject baseObject, float lightRange)
+	{
+		baseObject.shadowPointList.Clear();
+
+		List<Vector3> shadowVerts = CalculateShadowVerts(baseObject, lightRange);
+		CalculateShadowPointList(baseObject, shadowVerts, lightRange);
+		CalculateCentroidOfShadowPoint(baseObject);
+	}
+
+	private List<Vector3> CalculateShadowVerts(BaseObject baseObject, float lightRange)
+	{
+		Mesh mesh = baseObject.gameObject.GetComponent<MeshFilter>().mesh;
+		Vector3[] vertices = mesh.vertices;
+		List<Vector3> shadowVerts = new List<Vector3>();
+		foreach (Vector3 vertex in vertices)
+		{
+			shadowVerts.Add(baseObject.transform.TransformPoint(vertex));
+		}
+
+		foreach (Vector3 vertex in vertices)
+		{
+			Ray ray = new Ray(transform.position, (vertex - transform.position));
+			RaycastHit hit;
+
+			if(Physics.Raycast(ray, out hit, lightRange))
+			{
+				if(hit.collider == baseObject.gameObject.GetComponent<Collider>())
+				{
+					shadowVerts.Remove(vertex);
+				}
+			}
+		}
+
+		return shadowVerts;
+	}
+
+	private void CalculateShadowPointList(BaseObject baseObject, List<Vector3> shadowVerts, float lightRange)
+	{
+		baseObject.SetLayer("Default");
+
+		List<Vector2> shadowPointList = new List<Vector2>();
+		foreach (Vector3 vertex in shadowVerts)
+		{
+			Ray ray = new Ray(transform.position, (vertex - transform.position));
+			RaycastHit hit;
+			LayerMask layermask = 1<<LayerMask.NameToLayer("StageObject");
+
+			if(Physics.Raycast(ray, out hit, lightRange, layermask))
+			{
+				if (hit.transform != baseObject.transform && hit.transform.GetComponent<BaseObject>() != null)
+				{
+					continue;
+				}
+
+#if UNITY_EDITOR
+				Debug.DrawLine(ray.origin, hit.point, Color.blue);
+#endif
+
+				Vector2 point = new Vector2(hit.point.x, hit.point.z);
+				if(!shadowPointList.Contains(point))
+				{
+					shadowPointList.Add(point);
+				}
+			}
+		}
+
+		baseObject.SetLayer("StageObject");
+		baseObject.SetShadowPointList(shadowPointList);
+	}
+
+	private void CalculateCentroidOfShadowPoint(BaseObject baseObject)
+	{
+		int pointCount = baseObject.shadowPointList.Count;
+		if (pointCount <= 2) {return;}
+
+		List<Vector2> filteredPoint = new List<Vector2>();
+		float distanceFromLight = Vector3.Distance(transform.position, baseObject.transform.position);
+
+		foreach (Vector2 point in baseObject.shadowPointList)
+		{
+			if (distanceFromLight > Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(point.x, 0f, point.y)))
+			{
+				continue;
+			}
+
+			filteredPoint.Add(point);
+		}
+
+		pointCount = filteredPoint.Count;
+		if (pointCount <= 2) {return;}
+
+		Vector2 centroid = Vector2.zero;
+		foreach (Vector2 point in filteredPoint)
+		{
+			centroid += point / pointCount;
+		}
+
+#if UNITY_EDITOR
+		Debug.DrawLine(baseObject.transform.position, new Vector3(centroid.x, 0f, centroid.y), Color.red);
+#endif
+
+		baseObject.SetShadowCenterPoint(centroid);
+	}
+#endregion
 }
