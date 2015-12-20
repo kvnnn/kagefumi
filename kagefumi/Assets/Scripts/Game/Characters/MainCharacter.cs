@@ -50,9 +50,9 @@ public class MainCharacter : GameMonoBehaviour
 		}
 	}
 
-	public void GetOutFromObject(Vector2 shadowCentroid)
+	public void GetOutFromObject(Vector3 position)
 	{
-		transform.position = new Vector3(shadowCentroid.x, transform.position.y, shadowCentroid.y);
+		transform.position = new Vector3(position.x, position.y, position.z);
 		SetActive(true);
 	}
 
