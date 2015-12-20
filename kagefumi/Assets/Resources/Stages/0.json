@@ -22,7 +22,8 @@
 		}
 		{
 			"name" : "Sign",
-			"position" : "-1, 0.5, 2.5",
+			"position" : "-1,0.5,2.5",
+			"rotation" : "0,180,0",
 			"text" : "test test test test\ntest"
 		}
 	]
