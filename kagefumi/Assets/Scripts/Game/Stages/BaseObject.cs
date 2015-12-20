@@ -13,7 +13,7 @@ public class BaseObject : GameMonoBehaviour
 		get {return GetComponent<MainCharacterController>();}
 	}
 
-	private const float FADE_SPEED = 0.5f;
+	private const float FADE_SPEED = 0.25f;
 
 	protected virtual void Awake()
 	{
@@ -62,7 +62,7 @@ public class BaseObject : GameMonoBehaviour
 	{
 		OnBlinkStart();
 		LeanTween.cancel(gameObject);
-		LeanTween.alpha(gameObject, 0.5f, FADE_SPEED).setLoopPingPong().setRepeat(-1);
+		LeanTween.alpha(gameObject, 0f, FADE_SPEED).setLoopPingPong().setRepeat(-1);
 	}
 
 	protected virtual void OnBlinkStart() {}
