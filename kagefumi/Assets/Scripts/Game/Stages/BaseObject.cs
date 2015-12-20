@@ -28,6 +28,8 @@ public class BaseObject : GameMonoBehaviour
 #region Action Event
 	public void Dive()
 	{
+		OnDive();
+
 		if (mainCharacterController == null)
 		{
 			StopBlink();
@@ -39,6 +41,8 @@ public class BaseObject : GameMonoBehaviour
 
 	public void GetOut()
 	{
+		OnGetOut();
+
 		if (mainCharacterController)
 		{
 			Destroy(mainCharacterController);
