@@ -7,10 +7,6 @@ public class StageSelecterManager : GameMonoBehaviour
 	[SerializeField]
 	private GameObject stageSelecterPrefab;
 
-	[SerializeField]
-	private GameObject characterPrefab;
-	private HomeCharacter character;
-
 	private List<StageSelecter> stages;
 
 	private System.Action<StageSelecter> onSelecterClick;

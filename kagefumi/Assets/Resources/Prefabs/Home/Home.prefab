@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSelecterManager: {fileID: 11482020}
+  characterPrefab: {fileID: 113210, guid: 6b742384453d24f4fb5206334143e26b, type: 2}
   startButtonText: {fileID: 11410370}
 --- !u!114 &11418266
 MonoBehaviour:
@@ -271,7 +272,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageSelecterPrefab: {fileID: 176196, guid: 27034aaa060ad4800994a5979b6aed23, type: 2}
-  characterPrefab: {fileID: 0}
 --- !u!114 &11491880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,6 +405,10 @@ Prefab:
       propertyPath: stageSelecterPrefab
       value: 
       objectReference: {fileID: 176196, guid: 27034aaa060ad4800994a5979b6aed23, type: 2}
+    - target: {fileID: 0}
+      propertyPath: characterPrefab
+      value: 
+      objectReference: {fileID: 113210, guid: 6b742384453d24f4fb5206334143e26b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143826}
