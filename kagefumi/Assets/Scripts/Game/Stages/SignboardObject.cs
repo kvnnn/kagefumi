@@ -18,10 +18,9 @@ public class SignboardObject : BaseObject
 		}
 	}
 
-	protected override void Awake()
+	private void Start()
 	{
-		base.Awake();
-		HideText();
+		ShowText();
 	}
 
 	public void SetText(string text)
@@ -49,14 +48,19 @@ public class SignboardObject : BaseObject
 		HideText();
 	}
 
-	protected override void OnBlinkStart()
+	protected override void OnGetOut()
 	{
 		ShowText();
 	}
 
+	protected override void OnBlinkStart()
+	{
+		// ShowText();
+	}
+
 	protected override void OnBlinkStop()
 	{
-		HideText();
+		// HideText();
 	}
 #endregion
 }
