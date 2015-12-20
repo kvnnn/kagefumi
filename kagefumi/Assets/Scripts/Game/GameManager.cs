@@ -73,7 +73,7 @@ public class GameManager : GameMonoBehaviour
 	private void GetOutFromTarget()
 	{
 		diveTarget.GetOut();
-		mainCharacter.GetOutFromObject(diveTarget.shadowCenterPoint);
+		mainCharacter.GetOutFromObject(diveTarget.GetOutPosition());
 
 		diveTarget = null;
 

@@ -45,6 +45,11 @@ public class BaseObject : GameMonoBehaviour
 		}
 	}
 
+	public virtual Vector3 GetOutPosition()
+	{
+		return new Vector3(shadowCenterPoint.x, 0f, shadowCenterPoint.y);
+	}
+
 	protected virtual void OnGetOut() {}
 #endregion
 
