@@ -18,7 +18,9 @@ public class GameViewManager : ViewManager
 
 	protected override void BeforeShow(object parameter = null)
 	{
-		gameUIManager.Init(gameManager.OnDoubleTap, OnHomeButtonClick, gameManager.OnRestartButtonClick);
+		gameUIManager.Init(gameManager.OnDoubleTap, OnHomeButtonClick, gameManager.OnRestartButtonClick, gameManager.OnNextStageButtonClick);
+
+		gameManager.onClear = OnClear;
 		gameManager.InitGame(parameter);
 	}
 
@@ -46,6 +48,11 @@ public class GameViewManager : ViewManager
 	private void OnHomeButtonClick()
 	{
 		masterManager.ChangeView(MasterManager.View.Home);
+	}
+
+	private void OnClear()
+	{
+		gameUIManager.OnClear();
 	}
 #endregion
 }

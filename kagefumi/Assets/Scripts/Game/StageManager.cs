@@ -64,4 +64,16 @@ public class StageManager : GameMonoBehaviour
 			Destroy(stageGameObject);
 		}
 	}
+
+	public void SetSignOff()
+	{
+		foreach (BaseObject obj in stageObjects)
+		{
+			if (obj is SignboardObject)
+			{
+				SignboardObject signboard = obj as SignboardObject;
+				signboard.HideText();
+			}
+		}
+	}
 }

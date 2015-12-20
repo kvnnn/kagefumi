@@ -151,6 +151,7 @@ MonoBehaviour:
   - {fileID: 156654, guid: e74b805fff9254d8281bb76e565aac5f, type: 2}
   - {fileID: 140882, guid: 2bf9dfea120e14032ab8b4d20db7c7ae, type: 2}
   - {fileID: 183018, guid: 8f65c6113bb594583aeaa3612bc8c648, type: 2}
+  - {fileID: 146100, guid: a27466830a32c4b2aa7dfd3c01d2b3fd, type: 2}
 --- !u!114 &11461862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,7 +207,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: uiPartsPrefabs.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: uiBaseTransform

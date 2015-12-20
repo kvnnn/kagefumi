@@ -26,6 +26,8 @@ public class GameManager : GameMonoBehaviour
 	private BaseObject diveTarget = null;
 	private int stageId;
 
+	public System.Action onClear;
+
 #region Init
 	public void InitGame(object parameter = null)
 	{
@@ -47,7 +49,7 @@ public class GameManager : GameMonoBehaviour
 			Transform characterTransform = Instantiate(mainCharacterPrefab).transform;
 			characterTransform.SetParent(transform);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
-			mainCharacter.Init(CharacterOnUpdate, OnKeyGet);
+			mainCharacter.Init(CharacterOnUpdate, OnKeyGet, OnClear);
 		}
 
 		mainCharacter.Reset();
@@ -124,9 +126,22 @@ public class GameManager : GameMonoBehaviour
 		Restart();
 	}
 
+	public void OnNextStageButtonClick()
+	{
+		// TODO : check if there are stage behind
+		stageId += 1;
+		Restart();
+	}
+
 	private void OnKeyGet()
 	{
 		stageManager.goalLight.LightOn();
+	}
+
+	private void OnClear()
+	{
+		stageManager.SetSignOff();
+		onClear();
 	}
 #endregion
 }

@@ -2,42 +2,33 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PauseMenuParts : BaseUIParts
+public class ClearMenuParts : BaseUIParts
 {
-	[SerializeField]
-	private GameObject pauseMenuBaseGameObject;
-
-	[SerializeField]
-	private ButtonParts pauseButtonParts;
-
 	public System.Action onPause;
 	public System.Action onResume;
 	public System.Action onHomeButtonClick;
 	public System.Action onRestartButtonClick;
+	public System.Action onNextButtonClick;
 
 	public void Show()
 	{
-		pauseMenuBaseGameObject.SetActive(true);
+		gameObject.SetActive(true);
 	}
 
 	public void Hide()
 	{
-		pauseMenuBaseGameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 	private void Pause()
 	{
 		onPause();
-		pauseButtonParts.isEnabled = false;
-
 		Show();
 	}
 
 	private void Resume()
 	{
 		onResume();
-		pauseButtonParts.isEnabled = true;
-
 		Hide();
 	}
 
@@ -45,11 +36,6 @@ public class PauseMenuParts : BaseUIParts
 	public void OnPauseButtonClick()
 	{
 		Pause();
-	}
-
-	public void OnResumeButtonClick()
-	{
-		Resume();
 	}
 
 	public void OnHomeButtonClick()
@@ -62,6 +48,12 @@ public class PauseMenuParts : BaseUIParts
 	{
 		Resume();
 		onRestartButtonClick();
+	}
+
+	public void OnNextButtonClick()
+	{
+		Resume();
+		onNextButtonClick();
 	}
 #endregion
 }

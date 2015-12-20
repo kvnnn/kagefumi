@@ -13,10 +13,12 @@ public class MainCharacter : GameMonoBehaviour
 	}
 
 	private System.Action onKeyGet;
+	private System.Action onClear;
 
-	public void Init(System.Action<Vector3> onUpdate, System.Action onKeyGet)
+	public void Init(System.Action<Vector3> onUpdate, System.Action onKeyGet, System.Action onClear)
 	{
 		this.onKeyGet = onKeyGet;
+		this.onClear = onClear;
 		GetComponent<MainCharacterController>().onUpdate = onUpdate;
 	}
 
@@ -47,11 +49,7 @@ public class MainCharacter : GameMonoBehaviour
 	{
 		if (hasKey)
 		{
-			Debug.Log("clear");
-		}
-		else
-		{
-			Debug.Log("no key");
+			onClear();
 		}
 	}
 

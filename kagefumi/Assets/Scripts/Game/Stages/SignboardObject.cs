@@ -37,7 +37,7 @@ public class SignboardObject : BaseObject
 		textMesh.gameObject.SetActive(true);
 	}
 
-	private void HideText()
+	public void HideText()
 	{
 		textMesh.gameObject.SetActive(false);
 	}
