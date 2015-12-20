@@ -1,0 +1,22 @@
+{
+	"character" : "0,1,0",
+	"objects" :
+	[
+		{
+			"name" : "Key1",
+			"position" : "2,2.75,0"
+		},
+		{
+			"name" : "Cube",
+			"position" : "-2,1.02,-1",
+			"rotation" : "0,45,0",
+			"scale" : "1,2,1"
+		},
+		{
+			"name" : "Sign",
+			"position" : "-3,0.5,3",
+			"rotation" : "0,180,0",
+			"text" : "影から出ると\n箱の上に乗れるよ"
+		}
+	]
+}
