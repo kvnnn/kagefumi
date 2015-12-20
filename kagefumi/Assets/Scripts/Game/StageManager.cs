@@ -30,20 +30,18 @@ public class StageManager : GameMonoBehaviour
 		}
 	}
 
-	public void Init()
+	public void Init(int id)
 	{
-		SetStage();
+		SetStage(id);
 	}
 
-	private void SetStage()
+	private void SetStage(int stageId)
 	{
-		int stageId = 0;
-
 		DestoryStageIfExist();
 
 #if UNITY_EDITOR
 		// For Debug
-		stageId = 0;
+		// stageId = 0;
 
 		stageGameObject = creator.Create(stageId);
 #else

@@ -12,9 +12,9 @@ public class ViewManager : GameMonoBehaviour
 	}
 
 #region Show
-	public IEnumerator Show()
+	public IEnumerator Show(object parameter = null)
 	{
-		BeforeShow();
+		BeforeShow(parameter);
 		ShowView();
 		OnShow();
 		yield return new WaitForEndOfFrame();
@@ -26,7 +26,7 @@ public class ViewManager : GameMonoBehaviour
 		gameObject.SetActive(true);
 	}
 
-	protected virtual void BeforeShow()
+	protected virtual void BeforeShow(object parameter = null)
 	{
 
 	}

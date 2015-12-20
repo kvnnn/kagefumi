@@ -36,7 +36,7 @@ public class MasterManager : GameMonoBehaviour
 
 #if UNITY_EDITOR
 		// For Debug
-		currentView = View.Game;
+		// currentView = View.Game;
 #endif
 
 		ChangeView();
@@ -46,14 +46,14 @@ public class MasterManager : GameMonoBehaviour
 	{
 	}
 
-	public void ChangeView(View view)
+	public void ChangeView(View view, object parameter = null)
 	{
 		if (currentView == view) {return;}
 		currentView = view;
-		ChangeView();
+		ChangeView(parameter);
 	}
 
-	private void ChangeView()
+	private void ChangeView(object parameter = null)
 	{
 		GameObject viewGameObject = null;
 		Transform viewTransform = viewBaseTransform.Find(currentViewStr);
@@ -61,7 +61,7 @@ public class MasterManager : GameMonoBehaviour
 
 		HideCurrentView();
 		currentViewManager = viewGameObject.GetComponent<ViewManager>();
-		ShowCurrentView();
+		ShowCurrentView(parameter);
 	}
 
 	private void HideCurrentView()
@@ -70,9 +70,9 @@ public class MasterManager : GameMonoBehaviour
 		currentViewManager.Hide();
 	}
 
-	private void ShowCurrentView()
+	private void ShowCurrentView(object parameter = null)
 	{
-		StartCoroutine(currentViewManager.Show());
+		StartCoroutine(currentViewManager.Show(parameter));
 	}
 
 	private GameObject ImportView(View view)

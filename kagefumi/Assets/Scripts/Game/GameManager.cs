@@ -24,11 +24,17 @@ public class GameManager : GameMonoBehaviour
 	private MainCharacter mainCharacter;
 
 	private BaseObject diveTarget = null;
+	private int stageId;
 
 #region Init
-	public void InitGame()
+	public void InitGame(object parameter = null)
 	{
-		stageManager.Init();
+		if (parameter != null)
+		{
+			stageId = (int)parameter;
+		}
+
+		stageManager.Init(stageId);
 		InitMainCharacter(stageManager.characterDefaultPosition);
 
 		characterCamera.Init(mainCharacter.transform);
