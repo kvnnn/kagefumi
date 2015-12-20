@@ -16,10 +16,10 @@ public class GameViewManager : ViewManager
 		get {return gameUIManager.transform;}
 	}
 
-	protected override void BeforeShow()
+	protected override void BeforeShow(object parameter = null)
 	{
 		gameUIManager.Init(gameManager.OnDoubleTap, OnHomeButtonClick, gameManager.OnRestartButtonClick);
-		gameManager.InitGame();
+		gameManager.InitGame(parameter);
 	}
 
 	protected override void AfterShow()

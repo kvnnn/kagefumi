@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,13 +10,32 @@ public class HomeViewManager : ViewManager
 		get {return GetComponent<StageCreator>();}
 	}
 
-	protected override void BeforeShow()
+	[SerializeField]
+	private StageSelecterManager stageSelecterManager;
+
+	[SerializeField]
+	private Text startButtonText;
+
+	private int stageId = 0;
+
+	protected override void BeforeShow(object parameter = null)
 	{
 		stageCreator.InstantiateBaseStage();
+		stageSelecterManager.Init(SelecterClick);
 	}
 
+#region Event
 	public void StartButtonClick()
 	{
-		masterManager.ChangeView(MasterManager.View.Game);
+		if (stageId == 0) {return;}
+
+		masterManager.ChangeView(MasterManager.View.Game, stageId);
 	}
+
+	private void SelecterClick(StageSelecter stage)
+	{
+		startButtonText.text = "START Stage " + stage.id;
+		stageId = stage.id;
+	}
+#endregion
 }
