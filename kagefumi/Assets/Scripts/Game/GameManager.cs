@@ -47,7 +47,7 @@ public class GameManager : GameMonoBehaviour
 			Transform characterTransform = Instantiate(mainCharacterPrefab).transform;
 			characterTransform.SetParent(transform);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
-			mainCharacter.Init(CharacterOnUpdate);
+			mainCharacter.Init(CharacterOnUpdate, OnKeyGet);
 		}
 
 		mainCharacter.Reset();
@@ -122,6 +122,11 @@ public class GameManager : GameMonoBehaviour
 	public void OnRestartButtonClick()
 	{
 		Restart();
+	}
+
+	private void OnKeyGet()
+	{
+		stageManager.goalLight.LightOn();
 	}
 #endregion
 }
