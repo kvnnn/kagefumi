@@ -50,6 +50,8 @@ public class HomeViewManager : ViewManager
 
 	private void SelecterClick(StageSelecter stage)
 	{
+		if (stageId == stage.id) {return;}
+
 		startButtonText.text = "START Stage " + stage.id;
 		stageId = stage.id;
 
