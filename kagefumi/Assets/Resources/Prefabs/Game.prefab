@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3427ba1b98a49e69b738d921048f5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCharacterPrefab: {fileID: 133028, guid: 7b98cf3fe6171416fa65d98fa91aaedd, type: 2}
+  mainCharacterPrefab: {fileID: 113210, guid: 56ad5d3ae9679452b824437877a3abfa, type: 2}
 --- !u!114 &11449844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,7 +219,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mainCharacterPrefab
       value: 
-      objectReference: {fileID: 133028, guid: 7b98cf3fe6171416fa65d98fa91aaedd, type: 2}
+      objectReference: {fileID: 113210, guid: 56ad5d3ae9679452b824437877a3abfa, type: 2}
     - target: {fileID: 0}
       propertyPath: gameUIManager
       value: 

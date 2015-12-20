@@ -75,7 +75,7 @@ public class ShadowDetector : GameMonoBehaviour
 
 	private List<Vector3> CalculateShadowVerts(BaseObject baseObject, float lightRange)
 	{
-		Mesh mesh = baseObject.gameObject.GetComponent<MeshFilter>().mesh;
+		Mesh mesh = baseObject.gameObject.GetComponent<MeshFilter>().sharedMesh;
 		Vector3[] vertices = mesh.vertices;
 		List<Vector3> shadowVerts = new List<Vector3>();
 		foreach (Vector3 vertex in vertices)
