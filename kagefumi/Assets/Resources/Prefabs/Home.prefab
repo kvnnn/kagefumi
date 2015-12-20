@@ -44,6 +44,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401840}
   - 114: {fileID: 11411244}
+  - 114: {fileID: 11435072}
   m_Layer: 0
   m_Name: Home
   m_TagString: Untagged
@@ -232,6 +233,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11435072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75036fc926ac04fdb9e56f0b595dc6ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStagePrefab: {fileID: 466632, guid: 21432f5e1cf22464db5cb1a8218dad4b, type: 2}
 --- !u!114 &11475176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,6 +423,10 @@ Prefab:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: baseStagePrefab
+      value: 
+      objectReference: {fileID: 466632, guid: 21432f5e1cf22464db5cb1a8218dad4b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143826}

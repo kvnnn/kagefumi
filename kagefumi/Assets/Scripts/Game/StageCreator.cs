@@ -78,7 +78,7 @@ public class StageCreator : GameMonoBehaviour
 		return objectTransform;
 	}
 
-	private void InstantiateBaseStage()
+	public void InstantiateBaseStage()
 	{
 		if (baseStageTransform == null)
 		{
