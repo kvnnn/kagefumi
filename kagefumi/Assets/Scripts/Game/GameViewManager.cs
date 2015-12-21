@@ -50,9 +50,9 @@ public class GameViewManager : ViewManager
 		masterManager.ChangeView(MasterManager.View.Home);
 	}
 
-	private void OnClear()
+	private void OnClear(bool isLastStage)
 	{
-		gameUIManager.OnClear();
+		gameUIManager.OnClear(isLastStage);
 	}
 #endregion
 }

@@ -15,12 +15,12 @@ public class PauseMenuParts : BaseUIParts
 	public System.Action onHomeButtonClick;
 	public System.Action onRestartButtonClick;
 
-	public void Show()
+	private void Show()
 	{
 		pauseMenuBaseGameObject.SetActive(true);
 	}
 
-	public void Hide()
+	private void Hide()
 	{
 		pauseMenuBaseGameObject.SetActive(false);
 	}

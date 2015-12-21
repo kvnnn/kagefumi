@@ -4,14 +4,26 @@ using System.Collections.Generic;
 
 public class ClearMenuParts : BaseUIParts
 {
+	[SerializeField]
+	private ButtonParts nextButton;
+
 	public System.Action onPause;
 	public System.Action onResume;
 	public System.Action onHomeButtonClick;
 	public System.Action onRestartButtonClick;
 	public System.Action onNextButtonClick;
 
-	public void Show()
+	private void Show(bool isLastStage)
 	{
+		if (isLastStage)
+		{
+			nextButton.isEnabled = false;
+		}
+		else
+		{
+			nextButton.isEnabled = true;
+		}
+
 		gameObject.SetActive(true);
 	}
 
@@ -20,10 +32,10 @@ public class ClearMenuParts : BaseUIParts
 		gameObject.SetActive(false);
 	}
 
-	private void Pause()
+	public void Pause(bool isLastStage)
 	{
 		onPause();
-		Show();
+		Show(isLastStage);
 	}
 
 	private void Resume()
@@ -33,11 +45,6 @@ public class ClearMenuParts : BaseUIParts
 	}
 
 #region Event
-	public void OnPauseButtonClick()
-	{
-		Pause();
-	}
-
 	public void OnHomeButtonClick()
 	{
 		Resume();

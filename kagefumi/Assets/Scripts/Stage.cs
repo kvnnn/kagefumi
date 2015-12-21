@@ -26,4 +26,14 @@ public class Stage
 			return maxStageId_;
 		}
 	}
+
+	public static bool LastStage(int id)
+	{
+		return id == maxStageId;
+	}
+
+	public static int NextStageId(int id)
+	{
+		return LastStage(id) ? maxStageId : id + 1;
+	}
 }

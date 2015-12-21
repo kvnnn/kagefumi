@@ -167,9 +167,9 @@ public class GameUIManager : GameMonoBehaviour
 		isPause = false;
 	}
 
-	public void OnClear()
+	public void OnClear(bool isLastStage)
 	{
-		clearMenuParts.Show();
+		clearMenuParts.Pause(isLastStage);
 	}
 #endregion
 }

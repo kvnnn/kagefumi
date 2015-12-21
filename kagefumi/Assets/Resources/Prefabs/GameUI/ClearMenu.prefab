@@ -133,6 +133,7 @@ GameObject:
   - 222: {fileID: 22226596}
   - 114: {fileID: 11475730}
   - 114: {fileID: 11429426}
+  - 114: {fileID: 11407648}
   m_Layer: 0
   m_Name: Next
   m_TagString: Untagged
@@ -225,6 +226,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Restart
+--- !u!114 &11407648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18be7529823e44a1ba8dc656085b7aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 11418290}
 --- !u!114 &11416800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -547,6 +560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b7f63ba97054290b453486ee1e7a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextButton: {fileID: 11407648}
 --- !u!222 &22210292
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -26,7 +26,7 @@ public class GameManager : GameMonoBehaviour
 	private BaseObject diveTarget = null;
 	private int stageId;
 
-	public System.Action onClear;
+	public System.Action<bool> onClear;
 
 #region Init
 	public void InitGame(object parameter = null)
@@ -128,8 +128,7 @@ public class GameManager : GameMonoBehaviour
 
 	public void OnNextStageButtonClick()
 	{
-		// TODO : check if there are stage behind
-		stageId += 1;
+		stageId = Stage.NextStageId(stageId);
 		Restart();
 	}
 
@@ -141,7 +140,7 @@ public class GameManager : GameMonoBehaviour
 	private void OnClear()
 	{
 		stageManager.SetSignOff();
-		onClear();
+		onClear(Stage.LastStage(stageId));
 	}
 #endregion
 }
