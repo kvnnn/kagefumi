@@ -30,7 +30,7 @@ public class MasterManager : GameMonoBehaviour
 		Time.timeScale = 1f;
 
 #if UNITY_EDITOR
-		PlayerPrefs.DeleteAll
+		PlayerPrefs.DeleteAll();
 #endif
 	}
 
