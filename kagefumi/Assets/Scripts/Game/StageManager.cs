@@ -30,6 +30,11 @@ public class StageManager : GameMonoBehaviour
 		}
 	}
 
+	public GoalLight goalLight
+	{
+		get {return creator.goalLight;}
+	}
+
 	public void Init(int id)
 	{
 		SetStage(id);
@@ -47,6 +52,8 @@ public class StageManager : GameMonoBehaviour
 #else
 		stageGameObject = creator.Create(stageId);
 #endif
+
+		goalLight.LightOff();
 	}
 
 	private void DestoryStageIfExist()
@@ -55,6 +62,18 @@ public class StageManager : GameMonoBehaviour
 		{
 			stageObjects_ = null;
 			Destroy(stageGameObject);
+		}
+	}
+
+	public void SetSignOff()
+	{
+		foreach (BaseObject obj in stageObjects)
+		{
+			if (obj is SignboardObject)
+			{
+				SignboardObject signboard = obj as SignboardObject;
+				signboard.HideText();
+			}
 		}
 	}
 }

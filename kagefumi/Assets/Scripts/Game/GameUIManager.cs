@@ -51,14 +51,28 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
+	private ClearMenuParts clearMenuParts_;
+	private ClearMenuParts clearMenuParts
+	{
+		get
+		{
+			if (clearMenuParts_ == null)
+			{
+				clearMenuParts_ = GetComponentInChildren<ClearMenuParts>();
+			}
+			return clearMenuParts_;
+		}
+	}
+
 #region Init
-	public void Init(System.Action onDoubleTap, System.Action onHomeButtonClick, System.Action onRestartButtonClick)
+	public void Init(System.Action onDoubleTap, System.Action onHomeButtonClick, System.Action onRestartButtonClick, System.Action onNextButtonClick)
 	{
 		InitializeUIParts();
 
 		InitTapDetector(onDoubleTap);
 		InitJoystick();
 		InitPauseMenu(onHomeButtonClick, onRestartButtonClick);
+		InitClearMenu(onHomeButtonClick, onRestartButtonClick, onNextButtonClick);
 	}
 
 	private void InitializeUIParts()
@@ -100,6 +114,18 @@ public class GameUIManager : GameMonoBehaviour
 		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
 		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
 	}
+
+	private void InitClearMenu(System.Action onHomeButtonClick, System.Action onRestartButtonClick, System.Action onNextButtonClick)
+	{
+		isPause = false;
+		clearMenuParts.onPause = OnPause;
+		clearMenuParts.onResume = OnResume;
+		clearMenuParts.onHomeButtonClick = onHomeButtonClick;
+		clearMenuParts.onRestartButtonClick = onRestartButtonClick;
+		clearMenuParts.onNextButtonClick = onNextButtonClick;
+
+		clearMenuParts.Hide();
+	}
 #endregion
 
 	public void ShowJoystick(Vector3 position)
@@ -139,6 +165,11 @@ public class GameUIManager : GameMonoBehaviour
 	{
 		Time.timeScale = 1;
 		isPause = false;
+	}
+
+	public void OnClear(bool isLastStage)
+	{
+		clearMenuParts.Pause(isLastStage);
 	}
 #endregion
 }

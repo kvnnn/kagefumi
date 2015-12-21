@@ -2,56 +2,49 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PauseMenuParts : BaseUIParts
+public class ClearMenuParts : BaseUIParts
 {
 	[SerializeField]
-	private GameObject pauseMenuBaseGameObject;
-
-	[SerializeField]
-	private ButtonParts pauseButtonParts;
+	private ButtonParts nextButton;
 
 	public System.Action onPause;
 	public System.Action onResume;
 	public System.Action onHomeButtonClick;
 	public System.Action onRestartButtonClick;
+	public System.Action onNextButtonClick;
 
-	private void Show()
+	private void Show(bool isLastStage)
 	{
-		pauseMenuBaseGameObject.SetActive(true);
+		if (isLastStage)
+		{
+			nextButton.isEnabled = false;
+		}
+		else
+		{
+			nextButton.isEnabled = true;
+		}
+
+		gameObject.SetActive(true);
 	}
 
-	private void Hide()
+	public void Hide()
 	{
-		pauseMenuBaseGameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
-	private void Pause()
+	public void Pause(bool isLastStage)
 	{
 		onPause();
-		pauseButtonParts.isEnabled = false;
-
-		Show();
+		Show(isLastStage);
 	}
 
 	private void Resume()
 	{
 		onResume();
-		pauseButtonParts.isEnabled = true;
-
 		Hide();
 	}
 
 #region Event
-	public void OnPauseButtonClick()
-	{
-		Pause();
-	}
-
-	public void OnResumeButtonClick()
-	{
-		Resume();
-	}
-
 	public void OnHomeButtonClick()
 	{
 		Resume();
@@ -62,6 +55,12 @@ public class PauseMenuParts : BaseUIParts
 	{
 		Resume();
 		onRestartButtonClick();
+	}
+
+	public void OnNextButtonClick()
+	{
+		Resume();
+		onNextButtonClick();
 	}
 #endregion
 }

@@ -13,9 +13,9 @@ public class User
 	{
 		get
 		{
-#if UNITY_EDITOR
-			return DEBUG_STAGE_ID;
-#endif
+// #if UNITY_EDITOR
+// 			return DEBUG_STAGE_ID;
+// #endif
 			if (PlayerPrefs.HasKey(STAGE_ID_KEY))
 			{
 				return PlayerPrefs.GetInt(STAGE_ID_KEY);

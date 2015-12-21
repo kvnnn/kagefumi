@@ -9,6 +9,11 @@ public class StageCreator : GameMonoBehaviour
 	private Transform baseStagePrefab;
 	private Transform baseStageTransform;
 
+	public GoalLight goalLight
+	{
+		get {return baseStageTransform.GetComponentInChildren<GoalLight>();}
+	}
+
 	public Vector3 characterDefaultPosition {get; private set;}
 
 	private const string STAGE_PREFAB_PATH = "Prefabs/Stages/";

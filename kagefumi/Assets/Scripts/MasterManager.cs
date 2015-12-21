@@ -28,6 +28,10 @@ public class MasterManager : GameMonoBehaviour
 	void Awake()
 	{
 		Time.timeScale = 1f;
+
+#if UNITY_EDITOR
+		PlayerPrefs.DeleteAll
+#endif
 	}
 
 	void Start()

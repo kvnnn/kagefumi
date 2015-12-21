@@ -12,8 +12,13 @@ public class MainCharacter : GameMonoBehaviour
 		get {return gameObject.activeSelf;}
 	}
 
-	public void Init(System.Action<Vector3> onUpdate)
+	private System.Action onKeyGet;
+	private System.Action onClear;
+
+	public void Init(System.Action<Vector3> onUpdate, System.Action onKeyGet, System.Action onClear)
 	{
+		this.onKeyGet = onKeyGet;
+		this.onClear = onClear;
 		GetComponent<MainCharacterController>().onUpdate = onUpdate;
 	}
 
@@ -36,17 +41,15 @@ public class MainCharacter : GameMonoBehaviour
 	{
 		key.Get();
 		hasKey = true;
+
+		onKeyGet();
 	}
 
 	private void OpenDoor()
 	{
 		if (hasKey)
 		{
-			Debug.Log("clear");
-		}
-		else
-		{
-			Debug.Log("no key");
+			onClear();
 		}
 	}
 
