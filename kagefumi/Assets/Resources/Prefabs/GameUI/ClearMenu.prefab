@@ -225,7 +225,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Restart
+  m_Text: RESTART
 --- !u!114 &11407648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,7 +322,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Next
+  m_Text: NEXT
 --- !u!114 &11427036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -521,7 +521,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Home
+  m_Text: TITLE
 --- !u!114 &11475730
 MonoBehaviour:
   m_ObjectHideFlags: 1
