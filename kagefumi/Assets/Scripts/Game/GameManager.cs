@@ -141,6 +141,8 @@ public class GameManager : GameMonoBehaviour
 	{
 		stageManager.SetSignOff();
 		onClear(Stage.LastStage(stageId));
+
+		User.stageId = Stage.NextStageId(stageId);
 	}
 #endregion
 }
