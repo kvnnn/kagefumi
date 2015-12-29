@@ -18,6 +18,11 @@ public class SignboardObject : BaseObject
 		}
 	}
 
+	public override bool isDivable
+	{
+		get {return false;}
+	}
+
 	private void Start()
 	{
 		ShowText();

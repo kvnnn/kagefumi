@@ -13,6 +13,11 @@ public class BaseObject : GameMonoBehaviour
 		get {return GetComponent<MainCharacterController>();}
 	}
 
+	public virtual bool isDivable
+	{
+		get {return true;}
+	}
+
 	private const float FADE_SPEED = 0.25f;
 
 	protected virtual void Awake()
@@ -93,7 +98,7 @@ public class BaseObject : GameMonoBehaviour
 		this.shadowPointListDictionary[shadowDetector] = shadowPointList;
 	}
 
-	public List<Vector2> GetShadowPointList(ShadowDetector shadowDetector)
+	public virtual List<Vector2> GetShadowPointList(ShadowDetector shadowDetector)
 	{
 		if (!shadowPointListDictionary.ContainsKey(shadowDetector))
 		{
