@@ -18,12 +18,16 @@ public class CubeObject : BaseObject
 	public override Vector3 GetOutPosition()
 	{
 		return base.GetOutPosition();
-		// return new Vector3(transform.position.x, transform.position.y + transform.localScale.y/2, transform.position.z);
 	}
 
 	public bool IsSide(Vector3 position)
 	{
 		return position.y < transform.position.y;
+	}
+
+	public Vector3 TopPosition()
+	{
+		return new Vector3(transform.position.x, TopPositionY(), transform.position.z);
 	}
 
 	public float TopPositionY()
