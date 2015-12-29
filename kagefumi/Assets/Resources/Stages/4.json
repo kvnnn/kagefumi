@@ -1,0 +1,21 @@
+{
+	"character" : "0,1,0",
+	"objects" :
+	[
+		{
+			"name" : "Key3",
+			"position" : "2,2.75,0"
+		},
+		{
+			"name" : "Cube",
+			"position" : "-3.75,1.02,-1",
+			"rotation" : "0,45,0",
+			"scale" : "1,2,1"
+		},
+		{
+			"name" : "Light",
+			"position" : "2,1.6,1",
+			"rotation" : "0,45,0"
+		}
+	]
+}
