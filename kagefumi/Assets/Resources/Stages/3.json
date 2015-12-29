@@ -14,19 +14,19 @@
 		{
 			"name" : "Cube",
 			"position" : "2,0.56,-2",
-			"rotation" : "0,20,0",
+			"rotation" : "0,45,0",
 		},
 
 		{
 			"name" : "Cube",
 			"position" : "2,0.56,2",
-			"rotation" : "0,20,0",
+			"rotation" : "0,45,0",
 		},
 		{
 			"name" : "Sign",
 			"position" : "-3,0.5,3",
 			"rotation" : "0,180,0",
-			"text" : "影から出ると\n箱の上に乗れるよ"
+			"text" : "同じ高さの箱は\n上ることができるよ"
 		}
 	]
 }

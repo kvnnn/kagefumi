@@ -14,14 +14,10 @@ public class MainCharacterController : GameMonoBehaviour
 	}
 
 	public bool allowRotation = false;
-	private bool isRotationLock = false;
-	public bool lockRotation
-	{
-		set {isRotationLock = value;}
-	}
+	private Vector3 lockRotation;
 
 	private float totalTimeOnGround;
-	private const float LOCK_ROTATION_INTERVAL = 0.75f;
+	private const float LOCK_ROTATION_INTERVAL = 0.2f;
 
 	private CubeObject climbTarget;
 	private float collisionLastTime;
@@ -72,12 +68,8 @@ public class MainCharacterController : GameMonoBehaviour
 
 			if (totalTimeOnGround > LOCK_ROTATION_INTERVAL)
 			{
-				lockRotation = false;
+				lockRotation = Vector3.zero;
 			}
-		}
-		else
-		{
-			totalTimeOnGround = 0f;
 		}
 
 		if (controller != null)
@@ -100,10 +92,7 @@ public class MainCharacterController : GameMonoBehaviour
 
 	private void MoveAndRotateByCharacterController(Vector3 direction)
 	{
-		if (!isRotationLock)
-		{
-			transform.LookAt(transform.position + direction);
-		}
+		transform.LookAt(transform.position + (lockRotation == Vector3.zero ? direction : lockRotation));
 
 		Vector3 forward = Vector3.zero;
 		if (direction != Vector3.zero)
@@ -159,14 +148,11 @@ public class MainCharacterController : GameMonoBehaviour
 
 	private void ClimbTween(Vector3 position)
 	{
-		lockRotation = true;
-
-		if (allowRotation)
-		{
-			transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
-		}
+		position = new Vector3(position.x, transform.position.y, position.z) - transform.position;
+		lockRotation = position.normalized;
 
 		controller.Move(Vector3.up * 1.1f);
+		totalTimeOnGround = 0f;
 	}
 #endregion
 

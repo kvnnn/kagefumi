@@ -49,12 +49,47 @@ public class LightManager : GameMonoBehaviour
 
 		foreach (ShadowDetector shadowDetector in shadowDetectors)
 		{
-			BaseObject baseObject = shadowDetector.GetShadowObject(positionInVector2);
-			if (baseObject != null)
+			foreach (Vector2 offset in offsetList)
 			{
-				return baseObject;
+				positionInVector2 = new Vector2(positionInVector2.x + offset.x, positionInVector2.y + offset.y);
+
+				BaseObject baseObject = shadowDetector.GetShadowObject(positionInVector2);
+				if (baseObject != null)
+				{
+					return baseObject;
+				}
 			}
 		}
 		return null;
+	}
+
+	private Vector2[] offsetList_;
+	private Vector2[] offsetList
+	{
+		get
+		{
+			if (offsetList_ == null)
+			{
+				float offsetX, offsetY, offset;
+				offset = offsetX = offsetY = 0.05f;
+
+				offsetList_ = new Vector2[9];
+				for (int i = 0; i < 9; i++)
+				{
+					if (i%3 == 0)
+					{
+						offsetX = offset;
+						if (i/3 != 0)
+						{
+							offsetY -= offset;
+						}
+					}
+
+					offsetList_[i] = new Vector2(offsetX, offsetY);
+				}
+			}
+
+			return offsetList_;
+		}
 	}
 }
