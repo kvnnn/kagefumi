@@ -33,6 +33,7 @@ public class MainCharacter : GameMonoBehaviour
 		hasKey = false;
 
 		controller.lockMove = false;
+		controller.allowRotation = true;
 	}
 
 	public void SetActive(bool active)
