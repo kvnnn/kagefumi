@@ -12,6 +12,11 @@ public class MainCharacter : GameMonoBehaviour
 		get {return gameObject.activeSelf;}
 	}
 
+	private MainCharacterController controller
+	{
+		get {return GetComponent<MainCharacterController>();}
+	}
+
 	private System.Action onKeyGet;
 	private System.Action onClear;
 
@@ -19,12 +24,15 @@ public class MainCharacter : GameMonoBehaviour
 	{
 		this.onKeyGet = onKeyGet;
 		this.onClear = onClear;
-		GetComponent<MainCharacterController>().onUpdate = onUpdate;
+
+		controller.onUpdate = onUpdate;
 	}
 
 	public void Reset()
 	{
 		hasKey = false;
+
+		controller.lockMove = false;
 	}
 
 	public void SetActive(bool active)
@@ -49,6 +57,7 @@ public class MainCharacter : GameMonoBehaviour
 	{
 		if (hasKey)
 		{
+			controller.lockMove = true;
 			onClear();
 		}
 	}
