@@ -77,7 +77,7 @@ public class BaseObject : GameMonoBehaviour
 	{
 		OnBlinkStart();
 		LeanTween.cancel(gameObject);
-		LeanTween.alpha(gameObject, 0f, FADE_SPEED).setLoopPingPong().setRepeat(-1);
+		LeanTween.color(gameObject, Color.red, FADE_SPEED).setLoopPingPong().setRepeat(-1);
 	}
 
 	protected virtual void OnBlinkStart() {}
@@ -86,7 +86,7 @@ public class BaseObject : GameMonoBehaviour
 	{
 		OnBlinkStop();
 		LeanTween.cancel(gameObject);
-		LeanTween.alpha(gameObject, 1f, FADE_SPEED);
+		LeanTween.color(gameObject, Color.white, FADE_SPEED);
 	}
 
 	protected virtual void OnBlinkStop() {}
