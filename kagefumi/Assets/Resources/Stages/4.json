@@ -4,13 +4,12 @@
 	[
 		{
 			"name" : "Key3",
-			"position" : "2,2.75,0"
+			"position" : "2,1.75,0"
 		},
 		{
 			"name" : "Cube",
-			"position" : "-3.75,1.02,-1",
+			"position" : "-3.75,0.56,-1",
 			"rotation" : "0,45,0",
-			"scale" : "1,2,1"
 		},
 		{
 			"name" : "Light",
