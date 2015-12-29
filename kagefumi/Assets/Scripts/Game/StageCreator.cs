@@ -100,6 +100,8 @@ public class StageCreator : GameMonoBehaviour
 
 		SetCharacterDefaultPosition(CustomVector.ConvertStringToVector3(json["character"] as string));
 
+		SetMainLight(json.ContainsKey("main_light_shadow"));
+
 		List<Dictionary<string, object>> objectsJson = new List<Dictionary<string, object>>();
 		foreach (object obj in json["objects"] as List<object>)
 		{
@@ -112,6 +114,19 @@ public class StageCreator : GameMonoBehaviour
 	private void SetCharacterDefaultPosition(Vector3 characterDefaultPosition)
 	{
 		this.characterDefaultPosition = characterDefaultPosition;
+	}
+
+	private void SetMainLight(bool hasKey)
+	{
+		bool setShadow = hasKey;
+
+		foreach (Light light in baseStageTransform.GetComponentsInChildren<Light>())
+		{
+			if (light.type == LightType.Directional)
+			{
+				light.shadows = setShadow ? LightShadows.Hard : LightShadows.None;
+			}
+		}
 	}
 
 #if UNITY_EDITOR
