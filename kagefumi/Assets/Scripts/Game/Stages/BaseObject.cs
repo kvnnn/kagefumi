@@ -13,6 +13,11 @@ public class BaseObject : GameMonoBehaviour
 		get {return GetComponent<MainCharacterController>();}
 	}
 
+	public virtual bool isDivable
+	{
+		get {return true;}
+	}
+
 	private const float FADE_SPEED = 0.25f;
 
 	protected virtual void Awake()
@@ -72,7 +77,7 @@ public class BaseObject : GameMonoBehaviour
 	{
 		OnBlinkStart();
 		LeanTween.cancel(gameObject);
-		LeanTween.alpha(gameObject, 0f, FADE_SPEED).setLoopPingPong().setRepeat(-1);
+		LeanTween.color(gameObject, Color.red, FADE_SPEED).setLoopPingPong().setRepeat(-1);
 	}
 
 	protected virtual void OnBlinkStart() {}
@@ -81,7 +86,7 @@ public class BaseObject : GameMonoBehaviour
 	{
 		OnBlinkStop();
 		LeanTween.cancel(gameObject);
-		LeanTween.alpha(gameObject, 1f, FADE_SPEED);
+		LeanTween.color(gameObject, Color.white, FADE_SPEED);
 	}
 
 	protected virtual void OnBlinkStop() {}
@@ -93,7 +98,7 @@ public class BaseObject : GameMonoBehaviour
 		this.shadowPointListDictionary[shadowDetector] = shadowPointList;
 	}
 
-	public List<Vector2> GetShadowPointList(ShadowDetector shadowDetector)
+	public virtual List<Vector2> GetShadowPointList(ShadowDetector shadowDetector)
 	{
 		if (!shadowPointListDictionary.ContainsKey(shadowDetector))
 		{
