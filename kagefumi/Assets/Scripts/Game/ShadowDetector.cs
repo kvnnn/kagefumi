@@ -24,6 +24,11 @@ public class ShadowDetector : GameMonoBehaviour
 
 	private bool IsObjectInLight(BaseObject obj)
 	{
+		if (GetComponent<Light>().type != LightType.Spot)
+		{
+			return true;
+		}
+
 		Vector3 targetDir = obj.transform.position - transform.position;
 		Vector3 forward = transform.forward;
 		float angle = Vector3.Angle(targetDir, forward);
@@ -37,7 +42,7 @@ public class ShadowDetector : GameMonoBehaviour
 
 		foreach (BaseObject obj in objects)
 		{
-			if (IsOnShadow(position, obj.shadowPointList))
+			if (IsOnShadow(position, obj.GetShadowPointList(this)))
 			{
 				return obj;
 			}
@@ -66,11 +71,14 @@ public class ShadowDetector : GameMonoBehaviour
 #region ObjectShadow
 	public void UpdateObjectShadowBounds(BaseObject baseObject, float lightRange)
 	{
-		baseObject.shadowPointList.Clear();
+		baseObject.ClearPointList(this);
 
-		List<Vector3> shadowVerts = CalculateShadowVerts(baseObject, lightRange);
-		CalculateShadowPointList(baseObject, shadowVerts, lightRange);
-		CalculateCentroidOfShadowPoint(baseObject);
+		if (IsObjectInLight(baseObject))
+		{
+			List<Vector3> shadowVerts = CalculateShadowVerts(baseObject, lightRange);
+			CalculateShadowPointList(baseObject, shadowVerts, lightRange);
+			CalculateCentroidOfShadowPoint(baseObject);
+		}
 	}
 
 	private List<Vector3> CalculateShadowVerts(BaseObject baseObject, float lightRange)
@@ -131,18 +139,19 @@ public class ShadowDetector : GameMonoBehaviour
 		}
 
 		baseObject.SetLayer("StageObject");
-		baseObject.SetShadowPointList(shadowPointList);
+		baseObject.SetShadowPointList(this, shadowPointList);
 	}
 
 	private void CalculateCentroidOfShadowPoint(BaseObject baseObject)
 	{
-		int pointCount = baseObject.shadowPointList.Count;
+		List<Vector2> shadowPointList = baseObject.GetShadowPointList(this);
+		int pointCount = shadowPointList.Count;
 		if (pointCount <= 2) {return;}
 
 		List<Vector2> filteredPoint = new List<Vector2>();
 		float distanceFromLight = Vector3.Distance(transform.position, baseObject.transform.position);
 
-		foreach (Vector2 point in baseObject.shadowPointList)
+		foreach (Vector2 point in shadowPointList)
 		{
 			if (distanceFromLight > Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(point.x, 0f, point.y)))
 			{
@@ -165,7 +174,7 @@ public class ShadowDetector : GameMonoBehaviour
 		Debug.DrawLine(baseObject.transform.position, new Vector3(centroid.x, 0f, centroid.y), Color.red);
 #endif
 
-		baseObject.SetShadowCenterPoint(centroid);
+		baseObject.SetShadowCenterPoint(this, centroid);
 	}
 #endregion
 }
