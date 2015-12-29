@@ -8,9 +8,8 @@
 		},
 		{
 			"name" : "Cube",
-			"position" : "2,1.02,0",
+			"position" : "2,0.56,0",
 			"rotation" : "0,45,0",
-			"scale" : "1,2,1"
 		},
 		{
 			"name" : "Sign",

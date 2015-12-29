@@ -8,11 +8,25 @@ public class MainCharacterController : GameMonoBehaviour
 	private bool isMoveLock = false;
 	public bool lockMove
 	{
-		set
-		{
-			isMoveLock = value;
-		}
+		set {isMoveLock = value;}
 	}
+
+	private bool isRotationLock = false;
+	public bool lockRotation
+	{
+		set {isRotationLock = value;}
+	}
+
+	private bool isGrounded = true;
+	private float totalTimeOnGround;
+	private const float LOCK_ROTATION_INTERVAL = 0.75f;
+
+	private CubeObject climbTarget;
+	private float collisionLastTime;
+	private float collisionTotalTime;
+	private const float CLIMB_DECISION_INTERVAL_SEC = 0.1f;
+	private const float CLIMB_DECISION_TOTAL_SEC = 0.25f;
+	private const float CLIMB_OFFSET_Y = 0.15f;
 
 	public System.Action<Vector3> onUpdate;
 
@@ -48,7 +62,22 @@ public class MainCharacterController : GameMonoBehaviour
 			{
 				direction = new Vector3(x, 0f, z).normalized;
 			}
+		}
 
+		if (controller.isGrounded)
+		{
+			isGrounded = true;
+			totalTimeOnGround += Time.deltaTime;
+
+			if (totalTimeOnGround > LOCK_ROTATION_INTERVAL)
+			{
+				lockRotation = false;
+			}
+		}
+		else
+		{
+			isGrounded = false;
+			totalTimeOnGround = 0f;
 		}
 
 		if (controller != null)
@@ -64,7 +93,10 @@ public class MainCharacterController : GameMonoBehaviour
 
 	private void MoveByCharacterController(Vector3 direction)
 	{
-		transform.LookAt(transform.position + direction);
+		if (!isRotationLock)
+		{
+			transform.LookAt(transform.position + direction);
+		}
 
 		Vector3 forward = Vector3.zero;
 		if (direction != Vector3.zero)
@@ -75,4 +107,59 @@ public class MainCharacterController : GameMonoBehaviour
 
 		controller.SimpleMove(forward);
 	}
+
+#region ClimbCube
+	private bool IsClimbableCube(CubeObject cube)
+	{
+		return cube != null && cube.isClimbable && transform.position.y < cube.TopPositionY();
+	}
+
+	private void Climb(CubeObject cube)
+	{
+		if (climbTarget == null || climbTarget != cube)
+		{
+			climbTarget = cube;
+			collisionTotalTime = 0f;
+			collisionLastTime = Time.time;
+		}
+
+		float collisionInterval = Time.time - collisionLastTime;
+		collisionLastTime = Time.time;
+
+		if (collisionInterval > CLIMB_DECISION_INTERVAL_SEC)
+		{
+			collisionTotalTime = 0f;
+		}
+		else
+		{
+			collisionTotalTime += collisionInterval;
+		}
+
+		if (collisionTotalTime > CLIMB_DECISION_TOTAL_SEC)
+		{
+			ClimbTween(cube.TopPosition());
+		}
+	}
+
+	private void ClimbTween(Vector3 position)
+	{
+		lockRotation = true;
+
+		transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+
+		controller.Move(Vector3.up * 1.1f);
+	}
+#endregion
+
+#region Event
+	private void OnControllerColliderHit(ControllerColliderHit hit)
+	{
+		CubeObject cube = hit.collider.transform.parent.GetComponent<CubeObject>();
+
+		if (IsClimbableCube(cube))
+		{
+			Climb(cube);
+		}
+	}
+#endregion
 }
