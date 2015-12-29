@@ -17,7 +17,6 @@ public class MainCharacterController : GameMonoBehaviour
 		set {isRotationLock = value;}
 	}
 
-	private bool isGrounded = true;
 	private float totalTimeOnGround;
 	private const float LOCK_ROTATION_INTERVAL = 0.75f;
 
@@ -66,7 +65,6 @@ public class MainCharacterController : GameMonoBehaviour
 
 		if (controller.isGrounded)
 		{
-			isGrounded = true;
 			totalTimeOnGround += Time.deltaTime;
 
 			if (totalTimeOnGround > LOCK_ROTATION_INTERVAL)
@@ -76,7 +74,6 @@ public class MainCharacterController : GameMonoBehaviour
 		}
 		else
 		{
-			isGrounded = false;
 			totalTimeOnGround = 0f;
 		}
 
