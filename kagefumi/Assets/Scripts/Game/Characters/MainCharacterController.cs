@@ -5,19 +5,21 @@ using System.Collections.Generic;
 
 public class MainCharacterController : GameMonoBehaviour
 {
+	private const float MOVE_SPEED = 5.0f;
+
 	private bool isMoveLock = false;
 	public bool lockMove
 	{
 		set {isMoveLock = value;}
 	}
 
+	public bool allowRotation = false;
 	private bool isRotationLock = false;
 	public bool lockRotation
 	{
 		set {isRotationLock = value;}
 	}
 
-	private bool isGrounded = true;
 	private float totalTimeOnGround;
 	private const float LOCK_ROTATION_INTERVAL = 0.75f;
 
@@ -66,7 +68,6 @@ public class MainCharacterController : GameMonoBehaviour
 
 		if (controller.isGrounded)
 		{
-			isGrounded = true;
 			totalTimeOnGround += Time.deltaTime;
 
 			if (totalTimeOnGround > LOCK_ROTATION_INTERVAL)
@@ -76,13 +77,19 @@ public class MainCharacterController : GameMonoBehaviour
 		}
 		else
 		{
-			isGrounded = false;
 			totalTimeOnGround = 0f;
 		}
 
 		if (controller != null)
 		{
-			MoveByCharacterController(direction);
+			if (allowRotation)
+			{
+				MoveAndRotateByCharacterController(direction);
+			}
+			else
+			{
+				MoveByCharacterController(direction);
+			}
 		}
 
 		if (onUpdate != null)
@@ -91,7 +98,7 @@ public class MainCharacterController : GameMonoBehaviour
 		}
 	}
 
-	private void MoveByCharacterController(Vector3 direction)
+	private void MoveAndRotateByCharacterController(Vector3 direction)
 	{
 		if (!isRotationLock)
 		{
@@ -102,10 +109,19 @@ public class MainCharacterController : GameMonoBehaviour
 		if (direction != Vector3.zero)
 		{
 			forward = transform.TransformDirection(Vector3.forward);
-			forward *= 5.0f;
+			forward *= MOVE_SPEED;
 		}
 
 		controller.SimpleMove(forward);
+	}
+
+	private void MoveByCharacterController(Vector3 direction)
+	{
+		direction = transform.TransformDirection(direction);
+		direction *= MOVE_SPEED * Time.deltaTime;
+		direction.y = direction.y - 9.8f * Time.deltaTime;
+
+		controller.Move(direction);
 	}
 
 #region ClimbCube
@@ -145,7 +161,10 @@ public class MainCharacterController : GameMonoBehaviour
 	{
 		lockRotation = true;
 
-		transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+		if (allowRotation)
+		{
+			transform.LookAt(new Vector3(position.x, transform.position.y, position.z));
+		}
 
 		controller.Move(Vector3.up * 1.1f);
 	}
