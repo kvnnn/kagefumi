@@ -142,11 +142,11 @@ public class MainCharacterController : GameMonoBehaviour
 
 		if (collisionTotalTime > CLIMB_DECISION_TOTAL_SEC)
 		{
-			ClimbTween(cube.TopPosition());
+			Jump(cube.TopPosition());
 		}
 	}
 
-	private void ClimbTween(Vector3 position)
+	private void Jump(Vector3 position)
 	{
 		position = new Vector3(position.x, transform.position.y, position.z) - transform.position;
 		lockRotation = position.normalized;
