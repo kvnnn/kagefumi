@@ -31,6 +31,16 @@ public class BaseObject : GameMonoBehaviour
 		gameObject.layer = LayerMask.NameToLayer(layerName);
 	}
 
+	public bool IsSide(Vector3 position)
+	{
+		return IsSide(position.y);
+	}
+
+	public bool IsSide(float positionY)
+	{
+		return positionY < transform.position.y;
+	}
+
 #region Action Event
 	public void Dive()
 	{

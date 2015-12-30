@@ -53,7 +53,7 @@ public class LightManager : GameMonoBehaviour
 			{
 				positionInVector2 = new Vector2(positionInVector2.x + offset.x, positionInVector2.y + offset.y);
 
-				BaseObject baseObject = shadowDetector.GetShadowObject(positionInVector2);
+				BaseObject baseObject = shadowDetector.GetShadowObject(positionInVector2, position.y);
 				if (baseObject != null)
 				{
 					return baseObject;

@@ -37,12 +37,14 @@ public class ShadowDetector : GameMonoBehaviour
 		return angle < GetComponent<Light>().spotAngle/2 && Vector3.Distance(obj.transform.position, transform.position) < GetComponent<Light>().range;
 	}
 
-	public BaseObject GetShadowObject(Vector2 position)
+	public BaseObject GetShadowObject(Vector2 position, float positionY)
 	{
 		if (objects == null) {return null;}
 
 		foreach (BaseObject obj in objects)
 		{
+			if (!obj.IsSide(positionY)) {continue;}
+
 			if (IsOnShadow(position, obj.GetShadowPointList(this)))
 			{
 				return obj;

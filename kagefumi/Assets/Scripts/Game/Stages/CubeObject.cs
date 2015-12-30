@@ -20,11 +20,6 @@ public class CubeObject : BaseObject
 		return base.GetOutPosition();
 	}
 
-	public bool IsSide(Vector3 position)
-	{
-		return position.y < transform.position.y;
-	}
-
 	public Vector3 TopPosition()
 	{
 		return new Vector3(transform.position.x, TopPositionY(), transform.position.z);
