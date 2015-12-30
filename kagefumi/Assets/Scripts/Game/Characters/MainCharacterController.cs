@@ -106,7 +106,6 @@ public class MainCharacterController : GameMonoBehaviour
 
 	private void MoveByCharacterController(Vector3 direction)
 	{
-		direction = transform.TransformDirection(direction);
 		direction *= MOVE_SPEED * Time.deltaTime;
 		direction.y = direction.y - 9.8f * Time.deltaTime;
 
