@@ -12,6 +12,9 @@ public class MainCharacter : GameMonoBehaviour
 		get {return gameObject.activeSelf;}
 	}
 
+	public bool isDive {get; private set;}
+	private bool isTween;
+
 	private MainCharacterController controller
 	{
 		get {return GetComponent<MainCharacterController>();}
@@ -31,6 +34,7 @@ public class MainCharacter : GameMonoBehaviour
 	public void Reset()
 	{
 		hasKey = false;
+		isDive = false;
 
 		controller.lockMove = false;
 		controller.allowRotation = true;
@@ -63,11 +67,47 @@ public class MainCharacter : GameMonoBehaviour
 		}
 	}
 
-	public void GetOutFromObject(Vector3 position)
+#region DiveInOut
+	public bool Dive()
 	{
-		transform.position = new Vector3(position.x, position.y, position.z);
-		SetActive(true);
+		if (isTween) {return false;}
+		isTween = true;
+
+		Vector3 position = new Vector3(transform.position.x, -1f, transform.position.z);
+		controller.TweenMove(position, OnDiveComplete);
+
+		controller.enabled = false;
+
+		return true;
 	}
+
+	private void OnDiveComplete()
+	{
+		isTween = false;
+		isDive = true;
+		SetActive(false);
+	}
+
+	public bool GetOut(Vector3 position)
+	{
+		if (isTween) {return false;}
+		isTween = true;
+
+		SetActive(true);
+		transform.position = new Vector3(position.x, -1f, position.z);
+		controller.TweenMove(position, OnGetOutComplete);
+
+		return true;
+	}
+
+	private void OnGetOutComplete()
+	{
+		isTween = false;
+		isDive = false;
+
+		controller.enabled = true;
+	}
+#endregion
 
 #region Event
 	private void OnTriggerEnter(Collider collider)
