@@ -72,7 +72,7 @@ public class GameManager : GameMonoBehaviour
 #region Action
 	private void DiveToTarget()
 	{
-		mainCharacter.SetActive(false);
+		if (!mainCharacter.Dive()) {return;}
 		diveTarget.Dive();
 
 		characterCamera.SetCharacter(diveTarget.transform);
@@ -80,8 +80,8 @@ public class GameManager : GameMonoBehaviour
 
 	private void GetOutFromTarget()
 	{
+		if (!mainCharacter.GetOut(diveTarget.GetOutPosition())) {return;}
 		diveTarget.GetOut();
-		mainCharacter.GetOutFromObject(diveTarget.GetOutPosition());
 
 		diveTarget = null;
 
@@ -111,7 +111,7 @@ public class GameManager : GameMonoBehaviour
 	{
 		if (diveTarget == null) {return;}
 
-		if (mainCharacter.isActive)
+		if (!mainCharacter.isDive)
 		{
 			DiveToTarget();
 		}

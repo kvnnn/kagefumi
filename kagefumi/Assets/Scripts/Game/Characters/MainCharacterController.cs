@@ -155,6 +155,13 @@ public class MainCharacterController : GameMonoBehaviour
 	}
 #endregion
 
+#region Tween
+	public void TweenMove(Vector3 position, System.Action onComplete)
+	{
+		LeanTween.move(gameObject, position, 0.5f).setOnComplete(onComplete);
+	}
+#endregion
+
 #region Event
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
