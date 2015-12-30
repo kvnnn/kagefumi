@@ -46,9 +46,9 @@ public class CharacterCamera : GameMonoBehaviour
 
 	public void CalculateBounds()
 	{
-		GameObject floorGameObject = GameObject.FindWithTag("Floor");
-		Bounds bounds = floorGameObject.GetComponent<Collider>().bounds;
-		min = new Vector3(bounds.min.x - OFFSET, 0f, bounds.min.z);
-		max = new Vector3(bounds.max.x + OFFSET, 0f, bounds.min.z);
+		// GameObject floorGameObject = GameObject.FindWithTag("Floor");
+		// Bounds bounds = floorGameObject.GetComponent<Collider>().bounds;
+		// min = new Vector3(bounds.min.x - OFFSET, 0f, bounds.min.z);
+		// max = new Vector3(bounds.max.x + OFFSET, 0f, bounds.min.z);
 	}
 }
