@@ -14,11 +14,6 @@ public class GameManager : GameMonoBehaviour
 		get {return GetComponent<LightManager>();}
 	}
 
-	private CharacterCamera characterCamera
-	{
-		get {return Camera.main.gameObject.GetComponent<CharacterCamera>();}
-	}
-
 	[SerializeField]
 	private GameObject mainCharacterPrefab;
 	private MainCharacter mainCharacter;
@@ -38,8 +33,6 @@ public class GameManager : GameMonoBehaviour
 
 		stageManager.Init(stageId);
 		InitMainCharacter(stageManager.characterDefaultPosition);
-
-		characterCamera.Init(mainCharacter.transform);
 	}
 
 	private void InitMainCharacter(Vector3 characterDefaultPosition)
@@ -58,7 +51,6 @@ public class GameManager : GameMonoBehaviour
 
 	public void PrepareGame()
 	{
-		characterCamera.CalculateBounds();
 		lightManager.Init(stageManager.stageObjects);
 	}
 
@@ -74,8 +66,6 @@ public class GameManager : GameMonoBehaviour
 	{
 		if (!mainCharacter.Dive()) {return;}
 		diveTarget.Dive();
-
-		characterCamera.SetCharacter(diveTarget.transform);
 	}
 
 	private void GetOutFromTarget()
@@ -84,8 +74,6 @@ public class GameManager : GameMonoBehaviour
 		diveTarget.GetOut();
 
 		diveTarget = null;
-
-		characterCamera.SetCharacter(mainCharacter.transform);
 	}
 #endregion
 
