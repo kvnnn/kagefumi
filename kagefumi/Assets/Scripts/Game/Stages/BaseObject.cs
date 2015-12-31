@@ -8,7 +8,7 @@ public class BaseObject : GameMonoBehaviour
 	private Dictionary<ShadowDetector, List<Vector2>> shadowPointListDictionary;
 	private Dictionary<ShadowDetector, Vector2?> shadowCenterPointDictionary;
 
-	private MainCharacterController mainCharacterController
+	protected MainCharacterController mainCharacterController
 	{
 		get {return GetComponent<MainCharacterController>();}
 	}
@@ -49,8 +49,13 @@ public class BaseObject : GameMonoBehaviour
 		if (mainCharacterController == null)
 		{
 			StopBlink();
-			gameObject.AddComponent<MainCharacterController>();
+			AddMainCharacterController();
 		}
+	}
+
+	protected virtual void AddMainCharacterController()
+	{
+		gameObject.AddComponent<MainCharacterController>();
 	}
 
 	protected virtual void OnDive() {}
