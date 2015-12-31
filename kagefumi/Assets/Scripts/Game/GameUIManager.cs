@@ -171,5 +171,10 @@ public class GameUIManager : GameMonoBehaviour
 	{
 		clearMenuParts.Pause(isLastStage);
 	}
+
+	public void OnGameOver()
+	{
+		clearMenuParts.PauseGameOver();
+	}
 #endregion
 }

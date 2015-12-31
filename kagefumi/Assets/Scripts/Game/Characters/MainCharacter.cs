@@ -22,11 +22,13 @@ public class MainCharacter : GameMonoBehaviour
 
 	private System.Action onKeyGet;
 	private System.Action onClear;
+	private System.Action onGameOver;
 
-	public void Init(System.Action<Vector3> onUpdate, System.Action onKeyGet, System.Action onClear)
+	public void Init(System.Action<Vector3> onUpdate, System.Action onKeyGet, System.Action onClear, System.Action onGameOver)
 	{
 		this.onKeyGet = onKeyGet;
 		this.onClear = onClear;
+		this.onGameOver = onGameOver;
 
 		controller.onUpdate = onUpdate;
 	}
@@ -122,6 +124,10 @@ public class MainCharacter : GameMonoBehaviour
 		else if (trigger is DoorTrigger)
 		{
 			OpenDoor();
+		}
+		else if (trigger is EnemyTrigger)
+		{
+			onGameOver();
 		}
 	}
 #endregion

@@ -21,6 +21,7 @@ public class GameViewManager : ViewManager
 		gameUIManager.Init(gameManager.OnDoubleTap, OnHomeButtonClick, gameManager.OnRestartButtonClick, gameManager.OnNextStageButtonClick);
 
 		gameManager.onClear = OnClear;
+		gameManager.onGameOver = OnGameOver;
 		gameManager.InitGame(parameter);
 	}
 
@@ -53,6 +54,11 @@ public class GameViewManager : ViewManager
 	private void OnClear(bool isLastStage)
 	{
 		gameUIManager.OnClear(isLastStage);
+	}
+
+	private void OnGameOver()
+	{
+		gameUIManager.OnGameOver();
 	}
 #endregion
 }
