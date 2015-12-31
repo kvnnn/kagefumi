@@ -63,7 +63,11 @@ public class StageSelecterManager : GameMonoBehaviour
 				Transform selecterTransform = Instantiate(stageSelecterPrefab).transform;
 				selecterTransform.name = i.ToString();
 				selecterTransform.SetParent(transform);
-				selecterTransform.position = new Vector3((i%MAX_ROW - 2) * X_OFFSET, selecterTransform.position.y, selecterTransform.position.z + (int)(i/MAX_ROW) * Z_OFFSET );
+
+				// Currently 8 stage is the last stage, so fix the position of the stage select parts
+				int coulmn = (int)i/MAX_ROW;
+
+				selecterTransform.position = new Vector3((i%MAX_ROW - 2 + coulmn) * X_OFFSET, selecterTransform.position.y, selecterTransform.position.z + (int)(i/MAX_ROW) * Z_OFFSET );
 
 				StageSelecter stageSelecter = selecterTransform.GetComponent<StageSelecter>();
 				stageSelecter.Init(i + 1);
