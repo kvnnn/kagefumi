@@ -52,7 +52,7 @@ public class HomeViewManager : ViewManager
 	{
 		if (stageId == stage.id) {return;}
 
-		startButtonText.text = "START Stage " + stage.id;
+		startButtonText.text = "START\nStage " + stage.id;
 		stageId = stage.id;
 
 		character.SetTargetPosition(stage.transform.position);
