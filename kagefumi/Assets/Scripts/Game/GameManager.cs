@@ -22,6 +22,7 @@ public class GameManager : GameMonoBehaviour
 	private int stageId;
 
 	public System.Action<bool> onClear;
+	public System.Action onGameOver;
 
 #region Init
 	public void InitGame(object parameter = null)
@@ -42,7 +43,7 @@ public class GameManager : GameMonoBehaviour
 			Transform characterTransform = Instantiate(mainCharacterPrefab).transform;
 			characterTransform.SetParent(transform);
 			mainCharacter = characterTransform.GetComponent<MainCharacter>();
-			mainCharacter.Init(CharacterOnUpdate, OnKeyGet, OnClear);
+			mainCharacter.Init(CharacterOnUpdate, OnKeyGet, OnClear, OnGameOver);
 		}
 
 		mainCharacter.Reset();
@@ -131,6 +132,11 @@ public class GameManager : GameMonoBehaviour
 		onClear(Stage.LastStage(stageId));
 
 		User.stageId = Stage.NextStageId(stageId);
+	}
+
+	private void OnGameOver()
+	{
+		onGameOver();
 	}
 #endregion
 }
