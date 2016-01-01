@@ -1,0 +1,33 @@
+{
+	"character" : "0,1,3",
+	"objects" :
+	[
+		{
+			"name" : "Key3",
+			"position" : "0,0.5,-3",
+		},
+		{
+			"name" : "Enemy",
+			"position" : "-3.5,0.56,-3.5",
+			"rotation" : "0,90,0"
+		},
+		{
+			"name" : "Enemy",
+			"position" : "3.5,0.56,-3.5",
+			"rotation" : "0,270,0"
+		},
+		{
+			"name" : "Enemy",
+			"position" : "0,0.56,0",
+			"rotation" : "0,180,0"
+		},
+		{
+			"name" : "Cube",
+			"position" : "-3.2,0.56,2.46",
+		},
+		{
+			"name" : "Cube",
+			"position" : "3.2,0.56,2.46",
+		}
+	]
+}
