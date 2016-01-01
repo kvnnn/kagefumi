@@ -51,6 +51,19 @@ public class GameUIManager : GameMonoBehaviour
 		}
 	}
 
+	private PauseMenuButtonParts pauseMenuButtonParts_;
+	private PauseMenuButtonParts pauseMenuButtonParts
+	{
+		get
+		{
+			if (pauseMenuButtonParts_ == null)
+			{
+				pauseMenuButtonParts_ = GetComponentInChildren<PauseMenuButtonParts>();
+			}
+			return pauseMenuButtonParts_;
+		}
+	}
+
 	private ClearMenuParts clearMenuParts_;
 	private ClearMenuParts clearMenuParts
 	{
@@ -113,6 +126,9 @@ public class GameUIManager : GameMonoBehaviour
 		pauseMenuParts.onResume = OnResume;
 		pauseMenuParts.onHomeButtonClick = onHomeButtonClick;
 		pauseMenuParts.onRestartButtonClick = onRestartButtonClick;
+		pauseMenuParts.Hide();
+
+		pauseMenuButtonParts.pauseMenuParts = pauseMenuParts;
 	}
 
 	private void InitClearMenu(System.Action onHomeButtonClick, System.Action onRestartButtonClick, System.Action onNextButtonClick)

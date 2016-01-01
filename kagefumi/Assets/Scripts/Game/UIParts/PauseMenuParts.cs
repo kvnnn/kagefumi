@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 public class PauseMenuParts : BaseUIParts
 {
-	[SerializeField]
-	private GameObject pauseMenuBaseGameObject;
-
-	[SerializeField]
-	private ButtonParts pauseButtonParts;
+	private ButtonParts pauseButtonParts
+	{
+		get {return transform.parent.GetComponentInChildren<PauseMenuButtonParts>();}
+	}
 
 	public System.Action onPause;
 	public System.Action onResume;
@@ -17,12 +16,12 @@ public class PauseMenuParts : BaseUIParts
 
 	private void Show()
 	{
-		pauseMenuBaseGameObject.SetActive(true);
+		gameObject.SetActive(true);
 	}
 
-	private void Hide()
+	public void Hide()
 	{
-		pauseMenuBaseGameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 	private void Pause()

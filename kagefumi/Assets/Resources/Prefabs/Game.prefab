@@ -150,8 +150,9 @@ MonoBehaviour:
   uiPartsPrefabs:
   - {fileID: 156654, guid: e74b805fff9254d8281bb76e565aac5f, type: 2}
   - {fileID: 140882, guid: 2bf9dfea120e14032ab8b4d20db7c7ae, type: 2}
-  - {fileID: 183018, guid: 8f65c6113bb594583aeaa3612bc8c648, type: 2}
+  - {fileID: 121546, guid: e1826c63cca7040f1a305fa717e98bc5, type: 2}
   - {fileID: 146100, guid: a27466830a32c4b2aa7dfd3c01d2b3fd, type: 2}
+  - {fileID: 100388, guid: 61e63252daea04bcaa6318d11ec0af2f, type: 2}
 --- !u!114 &11461862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +208,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: uiPartsPrefabs.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: uiBaseTransform
@@ -228,11 +229,15 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: uiPartsPrefabs.Array.data[2]
       value: 
-      objectReference: {fileID: 183018, guid: 8f65c6113bb594583aeaa3612bc8c648, type: 2}
+      objectReference: {fileID: 121546, guid: e1826c63cca7040f1a305fa717e98bc5, type: 2}
     - target: {fileID: 0}
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: uiPartsPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 100388, guid: 61e63252daea04bcaa6318d11ec0af2f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 143826}
