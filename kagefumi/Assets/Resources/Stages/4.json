@@ -14,7 +14,7 @@
 		{
 			"name" : "Light",
 			"position" : "2,1.6,1",
-			"rotation" : "0,0,0"
+			"rotation" : "0,270,0"
 		}
 	]
 }
