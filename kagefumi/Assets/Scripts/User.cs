@@ -14,7 +14,7 @@ public class User
 		get
 		{
 #if UNITY_EDITOR
-			return DEBUG_STAGE_ID;
+			// return DEBUG_STAGE_ID;
 #endif
 
 			if (PlayerPrefs.HasKey(STAGE_ID_KEY))
