@@ -46,8 +46,10 @@ public class GameManager : GameMonoBehaviour
 			mainCharacter.Init(CharacterOnUpdate, OnKeyGet, OnClear, OnGameOver);
 		}
 
-		mainCharacter.Reset();
+		mainCharacter.gameObject.SetActive(false);
 		mainCharacter.transform.position = characterDefaultPosition;
+		mainCharacter.Reset();
+		mainCharacter.gameObject.SetActive(true);
 	}
 
 	public void PrepareGame()

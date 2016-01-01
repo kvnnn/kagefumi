@@ -127,6 +127,7 @@ public class MainCharacter : GameMonoBehaviour
 		}
 		else if (trigger is EnemyTrigger)
 		{
+			controller.lockMove = true;
 			onGameOver();
 		}
 	}
