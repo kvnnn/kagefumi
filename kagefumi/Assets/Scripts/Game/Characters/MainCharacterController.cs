@@ -113,11 +113,6 @@ public class MainCharacterController : GameMonoBehaviour
 	}
 
 #region ClimbCube
-	private bool IsClimbableCube(CubeObject cube)
-	{
-		return cube != null && cube.isClimbable && transform.position.y < cube.TopPositionY();
-	}
-
 	private void Climb(CubeObject cube)
 	{
 		if (climbTarget == null || climbTarget != cube)
@@ -167,7 +162,7 @@ public class MainCharacterController : GameMonoBehaviour
 	{
 		CubeObject cube = hit.collider.transform.parent.GetComponent<CubeObject>();
 
-		if (IsClimbableCube(cube))
+		if (cube != null && cube.IsClimbable(transform.position.y))
 		{
 			Climb(cube);
 		}
