@@ -39,6 +39,7 @@ public class LightManager : GameMonoBehaviour
 	{
 		foreach (ShadowDetector shadowDetector in shadowDetectors)
 		{
+			if (!shadowDetector.isActive) {continue;}
 			shadowDetector.UpdateShadowData();
 		}
 	}
@@ -49,6 +50,7 @@ public class LightManager : GameMonoBehaviour
 
 		foreach (ShadowDetector shadowDetector in shadowDetectors)
 		{
+			if (!shadowDetector.isActive) {continue;}
 			foreach (Vector2 offset in offsetList)
 			{
 				positionInVector2 = new Vector2(positionInVector2.x + offset.x, positionInVector2.y + offset.y);

@@ -102,6 +102,8 @@ public class StageCreator : GameMonoBehaviour
 
 		SetMainLight(json.ContainsKey("main_light_shadow"));
 
+		SetSubLight(json.ContainsKey("sub_light"));
+
 		List<Dictionary<string, object>> objectsJson = new List<Dictionary<string, object>>();
 		foreach (object obj in json["objects"] as List<object>)
 		{
@@ -125,6 +127,19 @@ public class StageCreator : GameMonoBehaviour
 			if (light.type == LightType.Directional)
 			{
 				light.shadows = setShadow ? LightShadows.Hard : LightShadows.None;
+			}
+		}
+	}
+
+	private void SetSubLight(bool hasKey)
+	{
+		bool showLight = !hasKey;
+
+		foreach (Light light in baseStageTransform.GetComponentsInChildren<Light>())
+		{
+			if (light.type == LightType.Point)
+			{
+				light.enabled = showLight;
 			}
 		}
 	}
