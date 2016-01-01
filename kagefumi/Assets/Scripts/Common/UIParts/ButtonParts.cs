@@ -19,7 +19,7 @@ public class ButtonParts : BaseUIParts
 
 	public System.Action<ButtonParts> buttonClick;
 
-	public void ButtonClick()
+	public virtual void ButtonClick()
 	{
 		buttonClick(this);
 	}

@@ -6,6 +6,9 @@ using System.Collections.Generic;
 
 public class TapDetector : BaseUIParts, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+	private float lastTimeClick;
+	private int clickCount = 1;
+
 	public System.Action onDoubleTap;
 	public System.Action<PointerEventData> onUp;
 	public System.Action<PointerEventData> onDrag;
@@ -17,14 +20,23 @@ public class TapDetector : BaseUIParts, IPointerDownHandler, IPointerUpHandler, 
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		if (eventData.clickCount == 2)
+		float currentTimeClick = Time.timeSinceLevelLoad;
+
+		if (Mathf.Abs(currentTimeClick - lastTimeClick) < 0.4f)
 		{
-			if (onDoubleTap != null)
-			{
-				onDoubleTap();
-			}
-			eventData.clickCount = 0;
+			clickCount++;
 		}
+		else
+		{
+			clickCount = 1;
+		}
+
+		if (clickCount == 2)
+		{
+			onDoubleTap();
+		}
+
+		lastTimeClick = currentTimeClick;
 	}
 
 	public void OnPointerUp(PointerEventData eventData)

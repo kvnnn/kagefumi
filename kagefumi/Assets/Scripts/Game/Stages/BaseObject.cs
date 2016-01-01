@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BaseObject : GameMonoBehaviour
 {
@@ -81,7 +82,8 @@ public class BaseObject : GameMonoBehaviour
 			}
 		}
 
-		return Vector3.zero;
+		Vector2 shadowPoint = shadowPointListDictionary.Values.ToList()[0][0];
+		return new Vector3(shadowPoint.x, 0f, shadowPoint.y);
 	}
 
 	protected virtual void OnGetOut() {}

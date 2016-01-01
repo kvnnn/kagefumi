@@ -5,15 +5,7 @@ using System.Collections.Generic;
 
 public class CubeObject : BaseObject
 {
-	private const float CLIMBABLE_SCALE = 1f;
-
-	public bool isClimbable
-	{
-		get
-		{
-			return transform.localScale.y <= CLIMBABLE_SCALE;
-		}
-	}
+	private const float CLIMBABLE_SCALE = 1.1f;
 
 	public override Vector3 GetOutPosition()
 	{
@@ -25,8 +17,13 @@ public class CubeObject : BaseObject
 		return new Vector3(transform.position.x, TopPositionY(), transform.position.z);
 	}
 
-	public float TopPositionY()
+	private float TopPositionY()
 	{
 		return transform.position.y + transform.localScale.y/2;
+	}
+
+	public bool IsClimbable(float positionY)
+	{
+		return positionY < TopPositionY() && (positionY >= TopPositionY() - CLIMBABLE_SCALE);
 	}
 }
