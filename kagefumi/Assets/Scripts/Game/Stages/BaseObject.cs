@@ -82,8 +82,15 @@ public class BaseObject : GameMonoBehaviour
 			}
 		}
 
-		Vector2 shadowPoint = shadowPointListDictionary.Values.ToList()[0][0];
-		return new Vector3(shadowPoint.x, 0f, shadowPoint.y);
+		foreach (List<Vector2> list in shadowPointListDictionary.Values)
+		{
+			if (list.Count > 0)
+			{
+				return new Vector3(list[0].x, 0f, list[0].y);
+			}
+		}
+
+		return new Vector3(transform.position.x, 0.1f, transform.position.z);
 	}
 
 	protected virtual void OnGetOut() {}

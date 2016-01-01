@@ -7,6 +7,11 @@ public class ShadowDetector : GameMonoBehaviour
 {
 	public BaseObject[] objects {get; private set;}
 
+	public bool isActive
+	{
+		get {return GetComponent<Light>() != null && GetComponent<Light>().enabled;}
+	}
+
 	public void Init(BaseObject[] objects)
 	{
 		this.objects = objects;
@@ -18,7 +23,7 @@ public class ShadowDetector : GameMonoBehaviour
 
 		foreach (BaseObject obj in objects)
 		{
-			if (!obj.isDivable) {continue;}
+			if (obj == null || !obj.isDivable) {continue;}
 			UpdateObjectShadowBounds(obj, GetComponent<Light>().range);
 		}
 	}

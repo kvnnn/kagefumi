@@ -1,6 +1,5 @@
 {
 	"character" : "0,1,0",
-	"main_light_shadow" : "true",
 	"objects" :
 	[
 		{
@@ -11,6 +10,12 @@
 			"name" : "Enemy",
 			"position" : "-2,0.56,-3",
 			"rotation" : "0,90,0"
+		},
+		{
+			"name" : "Sign",
+			"position" : "-3,0.5,3",
+			"rotation" : "0,180,0",
+			"text" : "警察官に\n見つからないようにしよう"
 		}
 	]
 }
