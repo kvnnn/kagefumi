@@ -96,8 +96,10 @@ public class GameUIManager : GameMonoBehaviour
 			{
 				RectTransform partsTransfrom = Instantiate(prefab).transform as RectTransform;
 				Vector3 position = partsTransfrom.anchoredPosition;
+				Vector3 scale = partsTransfrom.localScale;
 				partsTransfrom.SetParent(transform);
 				partsTransfrom.anchoredPosition = position;
+				partsTransfrom.localScale = scale;
 			}
 		}
 	}
